@@ -1,0 +1,16 @@
+//
+// Container elements
+//
+html {
+    box-sizing: border-box;
+    text-transform: lowercase;
+
+    .ucaseable { text-transform: none !important }
+}
+
+.page, .inner {
+    margin: 0 auto;
+    max-width: $layout-width;
+}
+
+*, *:before, *:after { box-sizing: inherit }

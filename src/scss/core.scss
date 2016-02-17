@@ -1,0 +1,23 @@
+//
+// Config
+//
+$breakpoints: (
+    tablet: 'min-width: 768px',
+    desktop: 'min-width: 1024px',
+);
+
+$header-height-mobile: 60px;
+$header-height-tablet: 75px;
+$header-height-desktop: 100px;
+
+$layout-padding-mobile: 10px;
+$layout-padding-tablet: 15px;
+$layout-width: 1200px;
+
+//
+// Mixins
+//
+@import './mixins/bp';
+@import './mixins/explode';
+@import './mixins/transition';
+

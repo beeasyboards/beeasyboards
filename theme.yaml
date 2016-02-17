@@ -1,0 +1,6 @@
+name: beeasyboards
+description: 'A family of skateboarders, snowboarders, and dope people dedicated to cheap beer and good times!'
+author: 'Be Easy Boards'
+require:
+    - RainLab.Blog
+    - Owl.RainLabBlogApi
