@@ -16,7 +16,7 @@ module.exports = {
      * @return {void}
      */
     close() {
-        this.isExpanded = false;
+        this.state.isExpanded = false;
     },
 
     /**
@@ -25,7 +25,7 @@ module.exports = {
      * @return {void}
      */
     open() {
-        this.isExpanded = true;
+        this.state.isExpanded = true;
     },
 
     /**
