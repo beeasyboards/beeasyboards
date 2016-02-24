@@ -7,7 +7,9 @@ nav {
         color: #fff;
         &.toggle {
             font-size: 24px;
-            padding: $layout-padding-mobile;
+            height: $header-height-mobile;
+            line-height: $header-height-mobile;
+            padding: 0 20px;
             @include bp-prop(display, block, none);
         }
     }
@@ -39,9 +41,13 @@ nav {
                 padding: 0 25px;
                 @include bp-prop('background-color', #444, transparent);
                 @include bp-prop('border-top', 1px solid #363636, none);
-                @include bp-prop('height, line-height', 45px, $header-height-tablet, $header-height-desktop);
+                @include bp-prop('height, line-height', 60px, $header-height-tablet, $header-height-desktop);
                 @include transition('background-color, height, line-height');
-                &:hover { background-color: #222 }
+
+                &:hover {
+                    background-color: #222;
+                    text-decoration: none;
+                }
             }
         }
     }
