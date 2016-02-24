@@ -10,9 +10,28 @@
 </template>
 
 <script>
-export default {
-    components: {
-        'v-header': require('./../components/header'),
-    },
-}
+    import FastClick from 'fastclick';
+
+    export default {
+
+        /**
+         * @type {Object}
+         */
+        components: {
+            'v-header': require('./../components/header'),
+        },
+
+        /**
+         * Bind fastclick to the body
+         *
+         * @return {void}
+         */
+        attached() {
+            if ('addEventListener' in document) {
+                document.addEventListener('DOMContentLoaded', () => {
+                    FastClick.attach(document.body);
+                }, false);
+            }
+        }
+    };
 </script>
