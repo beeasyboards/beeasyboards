@@ -15,7 +15,7 @@ header {
         @include bp-prop('padding-left', $layout-padding-mobile, $layout-padding-tablet);
         img {
             width: auto;
-            @include bp-prop('height', 30px, 45px, 60px);
+            @include bp-prop('height', 35px, 45px, 60px);
             @include transition('height');
         }
     }
