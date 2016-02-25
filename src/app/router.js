@@ -1,3 +1,5 @@
+import NavState from 'state/nav';
+
 //
 // Config
 //
@@ -25,6 +27,7 @@ module.exports = {
      * @return {void}
      */
     before({ from, to, next, abort, redirect }) {
+        NavState.close();
         next();
     },
 
