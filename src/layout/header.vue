@@ -34,34 +34,13 @@ header {
 </template>
 
 <script>
-import NavState from 'state/nav';
+    module.exports = {
 
-module.exports = {
-
-    /**
-     * @type {Object}
-     */
-    components: {
-        'v-nav': require('./nav'),
-    },
-
-    /**
-     * @return {Object}
-     */
-    data() {
-        return {
-            nav: NavState.state,
-            foo: 'foo',
-        }
-    },
-
-    /**
-     * @type {Object}
-     */
-    methods: {
-        onToggleNavigation() {
-            NavState.toggle();
+        /**
+         * @type {Object}
+         */
+        components: {
+            'v-nav': require('./nav'),
         },
-    },
-};
+    };
 </script>

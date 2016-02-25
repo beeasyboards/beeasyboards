@@ -9,7 +9,7 @@ import { config, before, after } from './app/router';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
-require('./app/filters');
+require('./app/boot');
 
 //
 // Get set
@@ -23,5 +23,5 @@ Router.afterEach(after);
 //
 // Go!
 //
-import Root from './app/root';
+import Root from './root';
 Router.start(Root, '#app');

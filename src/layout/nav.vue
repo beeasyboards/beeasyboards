@@ -56,81 +56,83 @@ nav {
 
 <template>
     <nav>
-        <ul v-bind:class="{ 'is-expanded': isExpanded }">
+        <pre>{{ isExpanded.toString() }}</pre>
+        <ul v-bind:class="{ 'is-expanded': NavState.isExpanded }">
             <li><a v-link="{ name: 'shop' }">Shop</a></li>
             <li><a v-link="{ name: 'blog-index' }">Blog</a></li>
             <li><a href="#">Down for Life</a></li>
             <li><a href="#">Cart ({{ cartItemCount }})</a></li>
         </ul>
-        <a href="#" @click.prevent="onToggle" class="toggle">
+        <a @click.prevent="toggleNavigation"  href="#"class="toggle">
             <i class="fa {{ mobileIcon }}"></i>
         </a>
     </nav>
 </template>
 
 <script>
-import CartState from 'state/cart';
+    import NavState from 'state/nav';
+    import CartState from 'state/cart';
 
-module.exports = {
-
-    /**
-     * @return {Object}
-     */
-    data() {
-        return {
-            cart: CartState,
-            isExpanded: false,
-        }
-    },
-
-    /**
-     * Close the mobile navigation when appropriate
-     *
-     * @return {void}
-     */
-    ready() {
-        this.$el.addEventListener('click', e => e.stopPropagation());
-        window.addEventListener('click', () => this.isExpanded = false);
-        window.addEventListener('resize', () => this.isExpanded = false);
-    },
-
-    /**
-     * @type {Object}
-     */
-    computed: {
+    module.exports = {
 
         /**
-         * Returns the number of items in the cart
-         *
-         * @return {Integer}
+         * @return {Object}
          */
-        cartItemCount() {
-            return CartState.getItemCount();
+        data() {
+            return {
+                NavState: NavState.state,
+            };
         },
 
         /**
-         * Returns the mobile navigation Font Awesome class
-         *
-         * @return {String}
-         */
-        mobileIcon() {
-            return this.isExpanded ? 'fa-times' : 'fa-bars';
-        },
-    },
-
-    /**
-     * @type {Object}
-     */
-    methods: {
-
-        /**
-         * Toggle the mobile navigation
+         * Close the mobile navigation when appropriate
          *
          * @return {void}
          */
-        onToggle() {
-            this.isExpanded = !this.isExpanded;
+        ready() {
+            this.$el.addEventListener('click', e => e.stopPropagation());
+            window.addEventListener('click', () => NavState.close());
+            window.addEventListener('resize', () => NavState.close());
+            window.addEventListener('scroll', () => NavState.close());
         },
-    },
-};
+
+        /**
+         * @type {Object}
+         */
+        computed: {
+
+            /**
+             * Returns the number of items in the cart
+             *
+             * @return {Integer}
+             */
+            cartItemCount() {
+                return CartState.getItemCount();
+            },
+
+            /**
+             * Returns the mobile navigation Font Awesome class
+             *
+             * @return {String}
+             */
+            mobileIcon() {
+                return NavState.state.isExpanded ? 'fa-times' : 'fa-bars';
+            },
+        },
+
+        /**
+         * @type {Object}
+         */
+        methods: {
+
+            /**
+             * Toggle the mobile navigation
+             *
+             * @return {void}
+             */
+            toggleNavigation() {
+                NavState.toggle();
+            },
+        },
+    };
 </script>
