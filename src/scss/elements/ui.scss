@@ -3,6 +3,7 @@
 //
 a {
     text-decoration: none;
+    @include transition(color);
     &:hover { text-decoration: underline }
 }
 
@@ -12,4 +13,5 @@ input[type=text],
 input[type=search] {
     padding: 8px 10px;
     text-transform: lowercase;
+    width: 100%;
 }

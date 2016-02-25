@@ -7,6 +7,7 @@ html {
     text-transform: lowercase;
 
     .caseable { text-transform: none !important }
+    *, *:before, *:after { box-sizing: inherit !important; }
 }
 
 .page, .inner {
@@ -17,5 +18,3 @@ html {
 .page {
     @include padding();
 }
-
-*, *:before, *:after { box-sizing: inherit }
