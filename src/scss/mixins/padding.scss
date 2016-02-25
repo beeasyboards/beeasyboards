@@ -1,0 +1,6 @@
+/**
+ * Include layout padding
+ */
+@mixin padding() {
+    @include bp-prop(padding, $layout-padding-mobile, $layout-padding-tablet);
+}

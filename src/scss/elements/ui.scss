@@ -1,10 +1,15 @@
 //
-// User interfaces
+// Links
 //
 a {
     text-decoration: none;
+    &:hover { text-decoration: underline }
+}
 
-    &:hover {
-        text-decoration: underline;
-    }
+//
+// Text boxes
+input[type=text],
+input[type=search] {
+    padding: 8px 10px;
+    text-transform: lowercase;
 }

@@ -3,14 +3,19 @@
 //
 html {
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
     text-transform: lowercase;
 
-    .ucaseable { text-transform: none !important }
+    .caseable { text-transform: none !important }
 }
 
 .page, .inner {
     margin: 0 auto;
     max-width: $layout-width;
+}
+
+.page {
+    @include padding();
 }
 
 *, *:before, *:after { box-sizing: inherit }
