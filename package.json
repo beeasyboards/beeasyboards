@@ -39,6 +39,7 @@
     "karma-webpack": "^1.7.0",
     "moment": "^2.11.2",
     "node-sass": "^3.4.2",
+    "normalize.scss": "^0.1.0",
     "phantomjs": "^1.9.19",
     "rimraf": "^2.5.0",
     "sass-loader": "^3.1.2",
