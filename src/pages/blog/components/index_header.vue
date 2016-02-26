@@ -55,7 +55,7 @@
         <a @click.prevent="showSearch" href="#">
             <i class="fa fa-search"></i>
         </a>
-        <form @submit="executeSearch" v-el:form>
+        <form @submit.prevent="executeSearch" v-el:form>
             <input
                 @blur="hideSearch"
                 @change="executeSearch"
