@@ -16,6 +16,10 @@
             &:hover { color: #000 }
         }
 
+        h1 {
+            @include transition(opacity);
+        }
+
         form {
             left: 0;
             opacity: 0;
@@ -35,10 +39,21 @@
             }
         }
 
-        &.search form {
-            opacity: 1;
-            top: $layout-padding-mobile;
+        &.search {
+            h1 {
+                opacity: 0;
+            }
+
+            form {
+                opacity: 1;
+                top: $layout-padding-mobile;
+            }
         }
+    }
+
+    ul {
+        @include transition(opacity);
+        &.is-searching { opacity: 0; }
     }
 </style>
 
@@ -52,13 +67,14 @@
             <form @submit.prevent="onSearchSubmitted">
                 <input
                     @blur="hideMobileSearch"
+                    @keypress.enter="blueMobileSearch"
                     v-el:search
                     v-model="search"
                     type="search"
                     placeholder="Search the blog...">
             </div>
         </div>
-        <ul>
+        <ul v-bind:class="{ 'is-searching': isSearching }">
             <li v-for="post in posts"><pre>{{ post | json }}</pre></li>
         </ul>
     </main>
@@ -74,6 +90,7 @@
          */
         data() {
             return {
+                isSearching: true,
                 search: '',
                 posts: [],
                 searchIsExpanded: false,
@@ -96,7 +113,8 @@
              * @return {Promise}
              */
             data(transition) {
-                return BlogResource.get().then(response => this.$set('posts', response.data));
+                return BlogResource.get()
+                    .then(response => this.$set('posts', response.data));
             },
         },
 
@@ -104,6 +122,10 @@
          * @type {Object}
          */
         methods: {
+
+            blueMobileSearch() {
+                this.$els.search.blur();
+            },
 
             hideMobileSearch() {
                 this.searchIsExpanded = false;
@@ -121,7 +143,12 @@
              * @return {void}
              */
             onSearchSubmitted(e) {
-                console.log ('searching!');
+                this.isSearching = true;
+                let search = this.search.trim();
+                BlogResource.get({ search }).then(response => {
+                    this.isSearching = false;
+                    this.$set('posts', response.data);
+                });
             },
         },
     };
