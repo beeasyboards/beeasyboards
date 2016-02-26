@@ -22,6 +22,7 @@ input, textarea {
     @include transition(border-color);
 
     &:focus { border-color: #222 }
+    &::-ms-clear { display: none }
 
     @mixin placeholder() { color: #999 }
     &::-webkit-input-placeholder { @include placeholder() }
