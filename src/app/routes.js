@@ -30,6 +30,11 @@ module.exports = {
             component: require('pages/blog/index'),
         },
 
+        '/blog/:slug': {
+            name: 'blog-show',
+            component: require('pages/blog/show'),
+        },
+
         //
         // Shop
         //

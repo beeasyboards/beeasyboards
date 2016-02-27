@@ -58,7 +58,7 @@
         <div class="posts" v-if="posts.length">
             <ul v-bind:class="{ 'is-searching': isSearching }">
                 <li v-for="post in posts">
-                    <a @click.prevent href="#">
+                    <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
                         <img src="{{ post.thumbnail.path }}" alt="{{ post.thumbnail.alt }}">
                         <div>{{ post.title }}</div>
                         <small>{{ post.subtitle }}</small>

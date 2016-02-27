@@ -2,9 +2,10 @@
 // Links
 //
 a {
+    color: #444;
     text-decoration: none;
     @include transition(color);
-    &:hover { text-decoration: underline }
+    &:hover { color: #000 }
 }
 
 a.icon-btn {
