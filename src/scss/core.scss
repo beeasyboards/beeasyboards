@@ -1,18 +1,20 @@
 //
 // Config
 //
+$unit: 12px;
+$font-unit: $unit * 1.5;
 $breakpoints: (
     tablet: 'min-width: 768px',
     desktop: 'min-width: 1024px',
 );
 
-$header-height-mobile: 70px;
-$header-height-tablet: 85px;
-$header-height-desktop: 110px;
+$header-height-mobile: $unit * 6;
+$header-height-tablet: $unit * 7;
+$header-height-desktop: $unit * 9;
 
-$layout-padding-mobile: 10px;
-$layout-padding-tablet: 15px;
-$layout-width: 1200px;
+$layout-padding-mobile: $unit;
+$layout-padding-tablet: $unit;
+$layout-width: $unit * 100;
 
 //
 // Mixins

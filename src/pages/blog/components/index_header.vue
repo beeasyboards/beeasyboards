@@ -1,20 +1,20 @@
 <style lang="sass" scoped> @import 'core';
     div {
+        margin: $unit 0;
         overflow: hidden;
-        padding: 0;
         position: relative;
+        @include bp-prop(height, $header-height-mobile / 1.5, $header-height-tablet / 1.5, $header-height-desktop / 1.5);
 
         h1 {
             opacity: 1;
-            padding-left: $layout-padding-mobile;
+            @include bp-prop(padding-left, $layout-padding-mobile, $layout-padding-tablet);
             @include transition(opacity);
         }
 
         form {
             opacity: 0;
-            padding: 4px 0;
             position: absolute;
-            top: -60px;
+            top: -$header-height-mobile;
             @include props((left, right), $layout-padding-mobile);
             @include transition('opacity, top');
         }
@@ -34,19 +34,19 @@
 
             form {
                 opacity: 1;
-                top: $layout-padding-mobile;
+                top: 0;
             }
         }
 
         //
         // Non-mobile
         //
-        @include bp('min-width: 480px') {
+        @include bp(tablet) {
             form {
                 opacity: 1;
-                padding-right: $layout-padding-tablet;
+                padding: 0 $layout-padding-tablet;
                 position: static;
-                width: 320px;
+                width: 50%;
             }
 
             a { display: none }

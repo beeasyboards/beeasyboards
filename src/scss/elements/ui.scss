@@ -8,14 +8,14 @@ a {
 }
 
 a.icon-btn {
-    $size: $header-height-mobile;
-    font-size: 24px;
+    font-size: $unit * 2;
     display: flex;
-    width: $size;
-    height: $size;
+    width: $header-height-mobile;
+    height: $header-height-mobile;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    @include props((height, width), $header-height-mobile);
 }
 
 //
@@ -30,6 +30,7 @@ input, textarea {
     padding: 12px;
     text-transform: lowercase;
     width: 100%;
+    font-size: $font-unit;
     @include transition(border-color);
 
     &:focus { border-color: #222 }
@@ -40,4 +41,8 @@ input, textarea {
     &::-moz-placeholder { @include placeholder() }
     &:-ms-input-placeholder { @include placeholder() }
     &:-moz-placeholder { @include placeholder() }
+}
+
+input {
+    @include props((height, line-height), $unit * 4);
 }
