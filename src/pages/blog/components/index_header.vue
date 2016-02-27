@@ -1,7 +1,6 @@
 <style lang="sass" scoped> @import 'core';
     div {
         margin: $unit 0;
-        overflow: hidden;
         position: relative;
         @include bp-prop(height, $header-height-mobile / 1.5, $header-height-tablet / 1.5, $header-height-desktop / 1.5);
 
@@ -56,7 +55,7 @@
 
 <template>
     <div v-bind:class="{ 'is-searching': isSearching }" class="page-header v-padded">
-        <h1>Blog</h1>
+        <h1>{{ header }}</h1>
         <a @click.prevent="onShow" href="#" class="icon-btn">
             <i class="fa fa-search"></i>
         </a>
@@ -75,6 +74,11 @@
 
 <script>
     module.exports = {
+
+        /**
+         * @type {Array}
+         */
+        props: ['header'],
 
         /**
          * @return {void}

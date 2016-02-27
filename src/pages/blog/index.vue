@@ -3,6 +3,10 @@
     $post-spacing-mobile: 12px;
     $post-spacing-tablet: 24px;
 
+    main {
+        overflow: hidden;
+    }
+
     ul {
         display: flex;
         flex-wrap: wrap;
@@ -15,10 +19,10 @@
         li {
             flex-basis: 100%;
             flex-grow: 1;
+            margin-bottom: $unit * 2;
             @include bp($post-mobile) { flex-basis: 50% }
             @include bp(tablet) { flex-basis: 33.3333% }
             @include bp(desktop) { flex-basis: 25% }
-            @include bp-prop(margin-bottom, $post-spacing-mobile, $post-spacing-tablet);
             @include bp-prop(max-width, none, 50%);
             @include bp-prop(padding, 0 $post-spacing-mobile, 0 $post-spacing-tablet / 2);
 
@@ -50,9 +54,9 @@
 
 <template>
     <main class="page">
-        <v-index-header @search="search"></v-index-header>
-        <div class="posts">
-            <ul v-bind:class="{ 'is-searching': isSearching }" v-if="posts.length">
+        <v-index-header @search="search" :header="header"></v-index-header>
+        <div class="posts" v-if="posts.length">
+            <ul v-bind:class="{ 'is-searching': isSearching }">
                 <li v-for="post in posts">
                     <a @click.prevent href="#">
                         <img src="{{ post.thumbnail.path }}" alt="{{ post.thumbnail.alt }}">
@@ -61,9 +65,6 @@
                     </a>
                 </li>
             </ul>
-        </div>
-        <div v-else class="h-padded">
-            <h3>{{ noResults }}</h3>
         </div>
     </main>
 </template>
@@ -97,6 +98,21 @@
          * @type {Object}
          */
         computed: {
+
+            /**
+             * Returns the header text
+             *
+             * @return {String}
+             */
+            header() {
+                if (this.lastSearch.length > 0) {
+                    return this.posts.length > 0
+                        ? `Results for "${ this.lastSearch }"`
+                        : `No results for "${ this.lastSearch }"`;
+                }
+
+                return 'Blog';
+            },
 
             /**
              * No results message
