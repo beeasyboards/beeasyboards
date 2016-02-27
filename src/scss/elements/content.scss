@@ -3,5 +3,14 @@
 //
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
-    margin: 10px 0;
+    margin: 0;
+}
+
+.page-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    @include bp-prop(height, $header-height-mobile, $header-height-tablet);
+    @include bp-prop(padding, 0 $layout-padding-mobile, 0 $layout-padding-tablet);
+    @include transition('height, padding');
 }

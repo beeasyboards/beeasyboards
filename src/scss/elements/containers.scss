@@ -13,8 +13,8 @@ html {
 .page, .inner {
     margin: 0 auto;
     max-width: $layout-width;
-}
 
-.page {
-    @include padding();
+    &.padded, .padded { @include padding() }
+    &.h-padded, .h-padded { @include bp-prop(padding, 0 $layout-padding-mobile, 0 $layout-padding-tablet) }
+    &.v-padded, .v-padded { @include bp-prop(padding, $layout-padding-mobile 0, $layout-padding-tablet 0) }
 }

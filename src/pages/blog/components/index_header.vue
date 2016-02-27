@@ -1,42 +1,33 @@
 <style lang="sass" scoped> @import 'core';
     div {
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
         overflow: hidden;
+        padding: 0;
         position: relative;
 
-        h1 { @include transition(opacity) }
+        h1 {
+            opacity: 1;
+            padding-left: $layout-padding-mobile;
+            @include transition(opacity);
+        }
 
         form {
-            left: 0;
             opacity: 0;
+            padding: 4px 0;
             position: absolute;
             top: -60px;
-            transition: all 250ms;
-            width: 100%;
+            @include props((left, right), $layout-padding-mobile);
+            @include transition('opacity, top');
         }
 
         a {
             color: #666;
-            font-size: 18px;
-            padding: 10px;
             &:hover { color: #000 }
         }
 
-        @include bp('min-width: 480px') {
-            form {
-                opacity: 1;
-                position: static;
-                transition-property: none;
-                width: 320px;
-            }
-
-            a { display: none }
-        }
-
-        &.search {
+        //
+        // Mobile searching
+        //
+        &.is-searching {
             h1 {
                 opacity: 0;
             }
@@ -46,22 +37,36 @@
                 top: $layout-padding-mobile;
             }
         }
+
+        //
+        // Non-mobile
+        //
+        @include bp('min-width: 480px') {
+            form {
+                opacity: 1;
+                padding-right: $layout-padding-tablet;
+                position: static;
+                width: 320px;
+            }
+
+            a { display: none }
+        }
     }
 </style>
 
 <template>
-    <div v-bind:class="{ 'search': searchIsExpanded }">
+    <div v-bind:class="{ 'is-searching': isSearching }" class="page-header v-padded">
         <h1>Blog</h1>
-        <a @click.prevent="showSearch" href="#">
+        <a @click.prevent="onShow" href="#" class="icon-btn">
             <i class="fa fa-search"></i>
         </a>
-        <form @submit.prevent="executeSearch" v-el:form>
+        <form v-el:form @submit.prevent>
             <input
-                @blur="hideSearch"
-                @change="executeSearch"
-                @keypress.enter.prevent="executeSearch"
                 v-el:search
+                @blur="onBlur"
+                @keypress.enter.prevent="onEnter"
                 v-model="search"
+                debounce="250"
                 type="search"
                 placeholder="Search the blog...">
         </form>
@@ -77,37 +82,29 @@
         data() {
             return {
                 search: '',
-                searchIsExpanded: false,
+                isSearching: false,
             };
         },
 
         /**
          * @type {Object}
          */
+        watch: {
+
+            /**
+             * Dispatch an event indicating the search has changed
+             *
+             * @return {void}
+             */
+            search() {
+                this.$dispatch('search', this.search.trim());
+            },
+        },
+
+        /**
+         * @type {Object}
+         */
         methods: {
-
-            /**
-             * Instruct the parent component to search the blog
-             *
-             * @return {void}
-             */
-            executeSearch() {
-                if (this.isMobile()) {
-                    this.$els.search.blur();
-                }
-
-                this.searchIsExpanded = false;
-                this.$dispatch('search-submitted', this.search.trim());
-            },
-
-            /**
-             * Blur the mobile search
-             *
-             * @return {void}
-             */
-            hideSearch() {
-                this.searchIsExpanded = false;
-            },
 
             /**
              * Determine if we're in mobile based on the form's position
@@ -119,13 +116,33 @@
             },
 
             /**
-             * Focus the mobile search
+             * Blur the textarea if we're on mobile
              *
              * @return {void}
              */
-            showSearch() {
+            onEnter() {
+                if (this.isMobile()) {
+                    this.$els.search.blur();
+                }
+            },
+
+            /**
+             * Blur the mobile search
+             *
+             * @return {void}
+             */
+            onBlur() {
+                this.isSearching = false;
+            },
+
+            /**
+             * Show the mobile search
+             *
+             * @return {void}
+             */
+            onShow() {
+                this.isSearching = true;
                 this.$els.search.focus();
-                this.searchIsExpanded = true;
             },
         },
     };

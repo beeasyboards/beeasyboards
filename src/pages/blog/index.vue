@@ -7,10 +7,13 @@
 
 <template>
     <main class="page">
-        <v-index-header @search-submitted="executeSearch"></v-index-header>
-        <ul v-bind:class="{ 'is-searching': isSearching }">
+        <v-index-header @search="search"></v-index-header>
+        <ul v-bind:class="{ 'is-searching': isSearching }" v-if="posts.length">
             <li v-for="post in posts"><pre>{{ post | json }}</pre></li>
         </ul>
+        <div v-else class="h-padded">
+            <h3>{{ noResults }}</h3>
+        </div>
     </main>
 </template>
 
@@ -42,6 +45,21 @@
         /**
          * @type {Object}
          */
+        computed: {
+
+            /**
+             * No results message
+             *
+             * @return {String}
+             */
+            noResults() {
+                return `We didn't find anything matching "${ this.lastSearch }".`;
+            },
+        },
+
+        /**
+         * @type {Object}
+         */
         route: {
             /**
              * @type {Boolean}
@@ -67,21 +85,21 @@
             /**
              * Search the blog for a given term
              *
-             * @param  {String} search
+             * @param  {String} term    The term being search for
              * @return {void}
              */
-            executeSearch(search) {
-                if (search === this.lastSearch) {
+            search(term) {
+                if (term === this.lastSearch) {
                     return;
                 }
 
+                this.lastSearch = term;
                 this.isSearching = true;
-                BlogResource.get({ search }).then(response => {
-                    this.lastSearch = search;
+                BlogResource.get({ search: term }).then(response => {
                     this.isSearching = false;
                     this.$set('posts', response.data);
                 });
-            }
+            },
         }
     };
 </script>

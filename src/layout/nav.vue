@@ -1,70 +1,65 @@
 <style lang="sass" scoped> @import 'core';
-nav {
-    display: flex;
-    align-items: center;
+    nav {
+        display: flex;
+        align-items: center;
 
-    a {
-        color: #fff;
-        &.toggle {
-            font-size: 24px;
-            height: $header-height-mobile;
-            line-height: $header-height-mobile;
-            padding: 0 20px;
-            @include bp-prop(display, block, none);
+        a {
+            color: #fff;
+            &.toggle {
+                @include bp(tablet) { display: none }
+            }
         }
-    }
 
-    ul {
-        left: 0;
-        list-style: none;
-        margin: 0;
-        max-height: 0;
-        overflow: hidden;
-        padding: 0;
-        right: 0;
-        top: $header-height-mobile;
-        z-index: 1;
-        @include bp-prop('margin-right', 0, $layout-padding-tablet);
-        @include bp-prop('max-height', 0, none);
-        @include bp-prop('border-bottom', 2px solid #222, 0);
-        @include bp-prop('position', absolute, static);
-        @include transition('max-height', 0.3s, ease-in-out);
-        &.is-expanded { max-height: 500px }
+        ul {
+            left: 0;
+            list-style: none;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            right: 0;
+            top: $header-height-mobile;
+            z-index: 1;
+            @include bp-prop('margin-right', 0, $layout-padding-tablet);
+            @include bp-prop('max-height', 0, none);
+            @include bp-prop('border-bottom', 2px solid #222, 0);
+            @include bp-prop('position', absolute, static);
+            @include transition('max-height', 0.3s, ease-in-out);
+            &.is-expanded { max-height: 500px }
 
-        li {
-            text-align: center;
-            @include bp-prop('display', block, inline-block);
-
-            a {
-                display: block;
-                min-width: 125px;
+            li {
                 text-align: center;
-                padding: 0 25px;
-                @include bp-prop('background-color', #444, transparent);
-                @include bp-prop('border-top', 1px solid #363636, none);
-                @include bp-prop('height, line-height', 60px, $header-height-tablet, $header-height-desktop);
-                @include transition('background-color, height, line-height');
+                @include bp-prop('display', block, inline-block);
 
-                &:hover {
-                    background-color: #222;
-                    text-decoration: none;
+                a {
+                    display: block;
+                    min-width: 125px;
+                    text-align: center;
+                    padding: 0 25px;
+                    @include bp-prop('background-color', #444, transparent);
+                    @include bp-prop('border-top', 1px solid #363636, none);
+                    @include bp-prop('height, line-height', 60px, $header-height-tablet, $header-height-desktop);
+                    @include transition('background-color, height, line-height');
+
+                    &:hover {
+                        background-color: #222;
+                        text-decoration: none;
+                    }
                 }
             }
         }
     }
-}
 </style>
 
 <template>
     <nav>
-        <pre>{{ isExpanded.toString() }}</pre>
         <ul v-bind:class="{ 'is-expanded': NavState.isExpanded }">
             <li><a v-link="{ name: 'shop' }">Shop</a></li>
             <li><a v-link="{ name: 'blog-index' }">Blog</a></li>
             <li><a href="#">Down for Life</a></li>
             <li><a href="#">Cart ({{ cartItemCount }})</a></li>
         </ul>
-        <a @click.prevent="toggleNavigation"  href="#"class="toggle">
+        <a @click.prevent="toggleNavigation"  href="#" class="toggle icon-btn">
             <i class="fa {{ mobileIcon }}"></i>
         </a>
     </nav>

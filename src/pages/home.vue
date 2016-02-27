@@ -1,5 +1,5 @@
 <template>
-    <main class="page">
+    <main class="page padded">
         <h1>Hello from the home page</h1>
     </main>
 </template>

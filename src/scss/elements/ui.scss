@@ -7,6 +7,17 @@ a {
     &:hover { text-decoration: underline }
 }
 
+a.icon-btn {
+    $size: $header-height-mobile;
+    font-size: 24px;
+    display: flex;
+    width: $size;
+    height: $size;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
 //
 // Text boxes
 //
@@ -16,7 +27,7 @@ input, textarea {
     border: 1px solid;
     border-color: #aaa;
     outline: none;
-    padding: 10px;
+    padding: 12px;
     text-transform: lowercase;
     width: 100%;
     @include transition(border-color);

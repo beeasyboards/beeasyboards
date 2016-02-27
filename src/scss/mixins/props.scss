@@ -1,0 +1,13 @@
+/**
+ * Writes multiple properties with a single value
+ *
+ * Example usage...
+ * .foo {
+ *     @include props((height, line-height), 20px);
+ * }
+ */
+@mixin props($props, $value) {
+    @each $prop in $props {
+        #{ $prop }: $value;
+    }
+}
