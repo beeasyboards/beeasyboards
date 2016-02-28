@@ -10,11 +10,11 @@ html {
     *, *:before, *:after { box-sizing: inherit !important; }
 }
 
-.page, .inner {
+.inner {
     margin: 0 auto;
     max-width: $layout-width;
 
-    &.padded, .padded { @include padding() }
-    &.h-padded, .h-padded { @include bp-prop(padding, 0 $layout-padding-mobile, 0 $layout-padding-tablet) }
-    &.v-padded, .v-padded { @include bp-prop(padding, $layout-padding-mobile 0, $layout-padding-tablet 0) }
+    .content, &.content {
+        @include bp-prop(padding, 0 $layout-padding-mobile, 0 $layout-padding-tablet);
+    }
 }

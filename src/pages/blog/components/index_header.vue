@@ -1,6 +1,6 @@
 <style lang="sass" scoped> @import 'core';
     div {
-        margin: $unit 0;
+        margin: 12px 0;
         position: relative;
         @include bp-prop(height, $header-height-mobile / 1.5, $header-height-tablet / 1.5, $header-height-desktop / 1.5);
 

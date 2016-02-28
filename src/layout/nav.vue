@@ -6,6 +6,11 @@
         a {
             color: #fff;
             &.toggle {
+                align-items: center;
+                display: flex;
+                height: $header-height-mobile;
+                margin-right: -$layout-padding-mobile;
+                padding: 0 $layout-padding-mobile * 2;
                 @include bp(tablet) { display: none }
             }
         }
@@ -60,7 +65,7 @@
             <li><a href="#">Down for Life</a></li>
             <li><a href="#">Cart ({{ cartItemCount }})</a></li>
         </ul>
-        <a @click.prevent="toggleNavigation"  href="#" class="toggle icon-btn">
+        <a @click.prevent="toggleNavigation"  href="#" class="toggle fa-btn">
             <i class="fa {{ mobileIcon }}"></i>
         </a>
     </nav>

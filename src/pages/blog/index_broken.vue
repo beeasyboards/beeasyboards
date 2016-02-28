@@ -1,71 +1,18 @@
-<style lang="sass" scoped> @import 'core';
-    $post-mobile: 'min-width: 376px';
-    $post-spacing-mobile: 12px;
-    $post-spacing-tablet: 24px;
-
-    main {
-        overflow: hidden;
-    }
-
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        list-style: none;
-        justify-content: space-around;
-        width: 100%;
-        padding: 0;
-        @include transition(opacity);
-
-        li {
-            flex-basis: 100%;
-            flex-grow: 1;
-            margin-bottom: 24px;
-            @include bp($post-mobile) { flex-basis: 50% }
-            @include bp(tablet) { flex-basis: 33.3333% }
-            @include bp(desktop) { flex-basis: 25% }
-            @include bp-prop(max-width, none, 50%);
-            @include bp-prop(padding, 0 $post-spacing-mobile, 0 $post-spacing-tablet / 2);
-
-            // The first two posts should be larger
-            &:nth-of-type(-n + 2) {
-                @include bp($post-mobile) { flex-basis: 50% }
-            }
-
-            a {
-                display: block;
-
-                &:hover {
-                    img { filter: brightness(100%) }
-                }
-            }
-
-            img {
-                border-radius: 3px;
-                filter: brightness(90%);
-                height: auto;
-                width: 100%;
-                @include transition(filter);
-            }
-        }
-
-        &.is-searching { opacity: 0 }
-    }
-</style>
-
 <template>
-    <main class="page">
-        <v-index-header @search="search" :header="header"></v-index-header>
+    <main class="inner content">
+        <v-index-header @search="search"></v-index-header>
         <div class="posts" v-if="posts.length">
             <ul v-bind:class="{ 'is-searching': isSearching }">
                 <li v-for="post in posts">
-                    <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
-                        <img src="{{ post.thumbnail.path }}" alt="{{ post.thumbnail.alt }}">
+                    <a v-link="{ name: 'blog-show', params: { slug: post.slug }}">
+                        <img :src="post.thumbnail.path" alt="{{ post.thumbnail.alt }}">
                         <div>{{ post.title }}</div>
                         <small>{{ post.subtitle }}</small>
                     </a>
                 </li>
             </ul>
         </div>
+        <p v-else>{{ noResults }}</p>
     </main>
 </template>
 
@@ -80,7 +27,6 @@
          */
         data() {
             return {
-                isSearching: false,
                 lastSearch: '',
                 posts: [],
                 searchIsExpanded: false,
@@ -98,21 +44,6 @@
          * @type {Object}
          */
         computed: {
-
-            /**
-             * Returns the header text
-             *
-             * @return {String}
-             */
-            header() {
-                if (this.lastSearch.length > 0) {
-                    return this.posts.length > 0
-                        ? `Results for "${ this.lastSearch }"`
-                        : `No results for "${ this.lastSearch }"`;
-                }
-
-                return 'Blog';
-            },
 
             /**
              * No results message
@@ -186,7 +117,7 @@
              * @return {void}
              */
             setPosts(data) {
-                this.posts = data.map(post => {
+                this.$set('posts', data.map(post => {
                     if (post.featured_images.length > 0) {
                         let img = post.featured_images[0];
                         post.thumbnail = { path: img.path, alt: img.title };
@@ -197,7 +128,7 @@
                     }
 
                     return post;
-                });
+                }));
             },
         },
     };

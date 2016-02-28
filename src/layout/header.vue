@@ -12,7 +12,6 @@
         }
 
         a.logo {
-            @include bp-prop('padding-left', $layout-padding-mobile, $layout-padding-tablet);
             img {
                 margin-bottom: -5%; // align the logo by font baseline, not by height
                 width: auto;
@@ -25,7 +24,7 @@
 
 <template>
     <header>
-        <div class="inner">
+        <div class="inner content">
             <a v-link="{ name: 'home' }" class="logo">
                 <img src="./../assets/logo_white.png" alt="Be Easy">
             </a>
