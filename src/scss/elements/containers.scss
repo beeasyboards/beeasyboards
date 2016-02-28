@@ -16,5 +16,18 @@ html {
 
     .content, &.content {
         @include bp-prop(padding, 0 $layout-padding-mobile, 0 $layout-padding-tablet);
+
+        header {
+            align-items: center;
+            display: flex;
+            min-height: $header-height-mobile;
+            padding: 20px 0;
+            @include bp-prop(overflow, visible, hidden);
+
+            h1 {
+                height: auto;
+                line-height: normal;
+            }
+        }
     }
 }

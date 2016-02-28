@@ -45,15 +45,6 @@
             width: 25%;
         }
     }
-
-    //
-    // Page title
-    //
-    h1 {
-        height: $header-height-mobile;
-        line-height: $header-height-mobile;
-    }
-
     //
     // Mobile search
     //
