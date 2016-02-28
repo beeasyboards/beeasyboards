@@ -25,7 +25,6 @@
             right: 0;
             top: $header-height-mobile;
             z-index: 1;
-            @include bp-prop('margin-right', 0, $layout-padding-tablet);
             @include bp-prop('max-height', 0, none);
             @include bp-prop('border-bottom', 2px solid #222, 0);
             @include bp-prop('position', absolute, static);

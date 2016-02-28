@@ -20,7 +20,7 @@
         li {
             flex-basis: 100%;
             flex-grow: 1;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             @include bp($post-mobile) { flex-basis: 50% }
             @include bp(tablet) { flex-basis: 33.3333% }
             @include bp(desktop) { flex-basis: 25% }
@@ -52,6 +52,8 @@
         &.is-searching { opacity: 0 }
     }
 
+    div.subtitle { font-size: 14px }
+
     p {
         text-align: center;
         @include bp(tablet) { text-align: left }
@@ -66,8 +68,8 @@
                 <li v-for="post in posts">
                     <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
                         <img :src="post.thumbnail.path" alt="{{ post.thumbnail.alt }}">
-                        <div>{{ post.title }}</div>
-                        <small>{{ post.subtitle }}</small>
+                        <h4>{{ post.title }}</h4>
+                        <div class="subtitle">{{ post.subtitle }}</div>
                     </a>
                 </li>
             </ul>
@@ -187,10 +189,8 @@
                     if (post.featured_images.length > 0) {
                         let img = post.featured_images[0];
                         post.thumbnail = { path: img.path, alt: img.title };
-                        post.subtitle = img.description;
                     } else {
                         post.thumbnail = { path: null, alt: null };
-                        post.subtitle = 'View post';
                     }
 
                     return post;
