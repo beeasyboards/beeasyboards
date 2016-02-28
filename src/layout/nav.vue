@@ -60,10 +60,10 @@
 <template>
     <nav>
         <ul v-bind:class="{ 'is-expanded': NavState.isExpanded }">
-            <li><a v-link="{ name: 'shop' }">Shop</a></li>
-            <li><a v-link="{ name: 'blog-index' }">Blog</a></li>
-            <li><a href="#">Down for Life</a></li>
-            <li><a href="#">Cart ({{ cartItemCount }})</a></li>
+            <li><a @click="closeNavigation" v-link="{ name: 'shop' }">Shop</a></li>
+            <li><a @click="closeNavigation" v-link="{ name: 'blog-index' }">Blog</a></li>
+            <li><a @click="closeNavigation" href="#">Down for Life</a></li>
+            <li><a @click="closeNavigation" href="#">Cart ({{ cartItemCount }})</a></li>
         </ul>
         <a @click.prevent="toggleNavigation"  href="#" class="toggle fa-btn">
             <i class="fa {{ mobileIcon }}"></i>
@@ -126,6 +126,15 @@
          * @type {Object}
          */
         methods: {
+
+            /**
+             * Close the mobile navigation
+             *
+             * @return {void}
+             */
+            closeNavigation() {
+                NavState.close();
+            },
 
             /**
              * Toggle the mobile navigation
