@@ -1,65 +1,72 @@
 <style lang="sass" scoped> @import 'core';
-    div {
-        margin: 12px 0;
+    $mobile-width: 'min-width: 481px';
+    header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         position: relative;
-        @include bp-prop(height, $header-height-mobile / 1.5, $header-height-tablet / 1.5, $header-height-desktop / 1.5);
 
-        h1 {
-            opacity: 1;
-            @include bp-prop(padding-left, $layout-padding-mobile, $layout-padding-tablet);
-            @include transition(opacity);
+        @include bp('min-width: 481px') {
+            flex-wrap: nowrap;
         }
+    }
 
-        form {
-            opacity: 0;
-            position: absolute;
-            top: -$header-height-mobile;
-            @include props((left, right), $layout-padding-mobile);
-            @include transition('opacity, top');
-        }
+    //
+    // Search form
+    //
+    form {
+        margin-top: -$header-height-mobile;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        padding: $layout-padding-mobile;
+        height: $header-height-mobile;
+        line-height: $header-height-mobile;
+        @include transition('margin-top, opacity, width', 450ms);
 
-        a {
-            color: #666;
-            &:hover { color: #000 }
-        }
-
-        //
-        // Mobile searching
-        //
         &.is-searching {
-            h1 {
-                opacity: 0;
-            }
-
-            form {
-                opacity: 1;
-                top: 0;
-            }
+            margin-top: 0;
+            opacity: 1;
         }
 
-        //
-        // Non-mobile
-        //
-        @include bp(tablet) {
-            form {
-                opacity: 1;
-                padding: 0 $layout-padding-tablet;
-                position: static;
-                width: 50%;
-            }
-
-            a { display: none }
+        @include bp('min-width: 481px') {
+            margin-top: 0;
+            opacity: 1;
+            order: 2;
+            padding-right: 0;
+            position: static;
+            width: 50%;
         }
+
+        @include bp(desktop) {
+            width: 25%;
+        }
+    }
+
+    //
+    // Page title
+    //
+    h1 {
+        height: $header-height-mobile;
+        line-height: $header-height-mobile;
+    }
+
+    //
+    // Mobile search
+    //
+    a {
+        align-self: center;
+        color: #aaa;
+        @include bp('min-width: 481px') { display: none }
     }
 </style>
 
 <template>
-    <div v-bind:class="{ 'is-searching': isSearching }" class="page-header v-padded">
-        <h1>{{ header }}</h1>
-        <a @click.prevent="onShow" href="#" class="icon-btn">
-            <i class="fa fa-search"></i>
-        </a>
-        <form v-el:form @submit.prevent>
+    <header class="content">
+        <form v-el:form @submit.prevent v-bind:class="{ 'is-searching': isSearching }">
             <input
                 v-el:search
                 @blur="onBlur"
@@ -69,7 +76,11 @@
                 type="search"
                 placeholder="Search the blog...">
         </form>
-    </div>
+        <h1>{{ header }}</h1>
+        <a @click.prevent="onShow" href="#" class="fa-btn">
+            <i class="fa fa-search"></i>
+        </a>
+    </header>
 </template>
 
 <script>

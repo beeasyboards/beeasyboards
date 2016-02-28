@@ -19,7 +19,9 @@ a.fa-btn {
 input, textarea {
     appearance: none !important;
     border: 1px solid #aaa;
+    border-radius: 2px;
     text-transform: lowercase;
+    padding: 12px;
     width: 100%;
     @include transition(border-color);
 
@@ -31,4 +33,8 @@ input, textarea {
     &::-moz-placeholder { @include placeholder() }
     &:-ms-input-placeholder { @include placeholder() }
     &:-moz-placeholder { @include placeholder() }
+}
+
+input {
+    @include props((height, line-height), 48px);
 }

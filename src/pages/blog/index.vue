@@ -13,6 +13,7 @@
         list-style: none;
         justify-content: space-around;
         width: 100%;
+        margin: 0;
         padding: 0;
         @include transition(opacity);
 
@@ -50,22 +51,28 @@
 
         &.is-searching { opacity: 0 }
     }
+
+    p {
+        text-align: center;
+        @include bp(tablet) { text-align: left }
+    }
 </style>
 
 <template>
-    <main class="page">
+    <main class="inner">
         <v-index-header @search="search" :header="header"></v-index-header>
         <div class="posts" v-if="posts.length">
             <ul v-bind:class="{ 'is-searching': isSearching }">
                 <li v-for="post in posts">
                     <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
-                        <img src="{{ post.thumbnail.path }}" alt="{{ post.thumbnail.alt }}">
+                        <img :src="post.thumbnail.path" alt="{{ post.thumbnail.alt }}">
                         <div>{{ post.title }}</div>
                         <small>{{ post.subtitle }}</small>
                     </a>
                 </li>
             </ul>
         </div>
+        <p class="content" v-else>We didn't find anything matching "{{ lastSearch }}".</p>
     </main>
 </template>
 
@@ -105,22 +112,12 @@
              * @return {String}
              */
             header() {
-                if (this.lastSearch.length > 0) {
-                    return this.posts.length > 0
-                        ? `Results for "${ this.lastSearch }"`
-                        : `No results for "${ this.lastSearch }"`;
+                if (this.lastSearch.length === 0) {
+                    return 'Blog';
                 }
 
-                return 'Blog';
-            },
-
-            /**
-             * No results message
-             *
-             * @return {String}
-             */
-            noResults() {
-                return `We didn't find anything matching "${ this.lastSearch }".`;
+                let isPlural = this.posts.length !== 1;
+                return this.posts.length + ' ' + (isPlural ? 'results' : 'result');
             },
         },
 
