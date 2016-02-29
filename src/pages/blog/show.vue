@@ -1,34 +1,96 @@
-<style lang="sass" scoped> @import 'core';
-    header {
+<style lang="sass"> @import 'core';
+    main.blog-show {
+        display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
-        h1, time { flex-basis: 100% }
 
-        @include bp(tablet) {
-            flex-wrap: nowrap;
+        //
+        // Header
+        //
+        header {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            flex-basis: 100%;
+            h1, time { flex-basis: 100% }
 
-            h1 {
-                flex-basis: auto;
+            @include bp(tablet) {
+                flex-wrap: nowrap;
+                h1 { flex-basis: auto }
+                time {
+                    flex-basis: auto;
+                    padding-top: 12px;
+                }
+            }
+        }
+
+        //
+        // Articles
+        //
+        article {
+            a { text-decoration: underline }
+
+            div.post-content *:not(:last-child) { margin-bottom: 24px }
+
+            div.gallery {
+                align-items: space-around;
+                display: flex;
+                margin: -12px;
+                @include bp-prop(flex-wrap, wrap, nowrap);
+
+                div {
+                    font-size: 0; // remove whitespace
+                    margin-bottom: 0 !important;
+                    padding: 12px;
+                    flex-basis: 100%;
+                }
+                img { width: 100%; height: auto; }
+                + div.gallery { margin-top: -24px !important }
             }
 
-            time {
-                flex-basis: auto;
-                padding-top: 12px;
+            blockquote {
+                text-align: center;
+                @include bp-prop(margin, 0px 12px 24px, 0px 24px 24px);
+                p {
+                    font-size: 1.5rem;
+                    margin-bottom: 6px !important;
+                }
+            }
+
+            img, div.video-wrapper { border-radius: 3px }
+
+            img {
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        //
+        // Sidebar
+        //
+        aside {
+            flex-basis: 100%;
+
+            h2 {
+                height: $header-height-mobile;
+                line-height: $header-height-mobile;
             }
         }
     }
-
 </style>
 
 <template>
-    <main class="inner content">
-        <header>
-            <h1>{{ post.title }}</h1>
-            <time datetime="{{ post.published_at | moment }}">
-                {{ post.published_at | moment 'MMM DD, YYYY' }}
-            </time>
-        </header>
-        <div v-linkable>{{{ post.content_html }}}</div>
+    <main class="blog-show inner content">
+        <article>
+            <header>
+                <h1>{{ post.title }}</h1>
+                <time datetime="{{ post.published_at | moment }}">
+                    {{ post.published_at | moment 'MMM DD, YYYY' }}
+                </time>
+            </header>
+            <div class="post-content" v-linkable>{{{ post.content_html }}}</div>
+        </article>
+        <aside>
+            <h2>Related</h2>
+        </aside>
     </main>
 </template>
 

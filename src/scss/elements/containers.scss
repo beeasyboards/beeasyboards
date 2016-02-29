@@ -21,7 +21,7 @@ html {
             align-items: center;
             display: flex;
             min-height: $header-height-mobile;
-            padding: 20px 0;
+            padding: 24px 0;
             @include bp-prop(overflow, visible, hidden);
 
             h1 {
