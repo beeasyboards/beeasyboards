@@ -4,28 +4,25 @@
         flex-wrap: wrap;
 
         //
-        // Header
-        //
-        header {
-            flex-wrap: wrap;
-            justify-content: space-between;
-            flex-basis: 100%;
-            h1, time { flex-basis: 100% }
-
-            @include bp(tablet) {
-                flex-wrap: nowrap;
-                h1 { flex-basis: auto }
-                time {
-                    flex-basis: auto;
-                    padding-top: 12px;
-                }
-            }
-        }
-
-        //
         // Articles
         //
         article {
+
+            header {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                flex-basis: 100%;
+
+                @include bp(tablet) {
+                    flex-wrap: nowrap;
+                    h1 { flex-basis: auto }
+                    time {
+                        flex-basis: auto;
+                        padding-top: 12px;
+                    }
+                }
+            }
+
             a { text-decoration: underline }
 
             div.post-content *:not(:last-child) { margin-bottom: 24px }
@@ -90,14 +87,27 @@
         </article>
         <aside>
             <h2>Related</h2>
+            <v-blog-posts :posts="related"></v-blog-posts>
         </aside>
     </main>
 </template>
 
 <script>
     import BlogResource from 'resources/blog';
+    import BlogPostsComponent from './components/posts';
+    import ParseBlogPosts from './utilities/parse_posts.js';
 
     module.exports = {
+
+        /**
+         * @return {Object}
+         */
+        data() {
+            return {
+                post: {},
+                related: [],
+            };
+        },
 
         /**
          * @type {Object}
@@ -115,8 +125,21 @@
              * @return {Promise}
              */
             data(transition) {
-                return BlogResource.get(this.$route.params).then(response => this.$set('post', response.data));
+                let Post = BlogResource.get(this.$route.params)
+                    .then(response => this.$set('post', response.data));
+
+                let Related = BlogResource.getRelated(this.$route.params)
+                    .then(response => this.$set('related', ParseBlogPosts(response)));
+
+                return Promise.all([ Post, Related ]);
             },
+        },
+
+        /**
+         * @type {Object}
+         */
+        components: {
+            'v-blog-posts': BlogPostsComponent,
         },
     };
 </script>

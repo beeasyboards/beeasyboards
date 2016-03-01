@@ -26,6 +26,7 @@
     import BlogResource from 'resources/blog';
     import BlogPostsComponent from './components/posts';
     import IndexHeaderComponent from './components/index_header';
+    import ParseBlogPosts from './utilities/parse_posts.js';
 
     module.exports = {
 
@@ -85,7 +86,7 @@
              * @return {Promise}
              */
             data(transition) {
-                return BlogResource.get().then(response => this.setPosts(response.data));
+                return BlogResource.get().then(response => this.$set('posts', ParseBlogPosts(response)));
             },
         },
 
@@ -110,25 +111,6 @@
                 BlogResource.get({ search: term }).then(response => {
                     this.isSearching = false;
                     this.setPosts(response.data);
-                });
-            },
-
-            /**
-             * Parse out image details and set post data
-             *
-             * @param  {Object} data
-             * @return {void}
-             */
-            setPosts(data) {
-                this.posts = data.map(post => {
-                    if (post.featured_images.length > 0) {
-                        let img = post.featured_images[0];
-                        post.thumbnail = { path: img.path, alt: img.title };
-                    } else {
-                        post.thumbnail = { path: null, alt: null };
-                    }
-
-                    return post;
                 });
             },
         },

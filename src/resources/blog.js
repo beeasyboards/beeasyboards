@@ -16,4 +16,14 @@ module.exports = {
     get(params) {
         return Vue.resource(this.url).get(params);
     },
+
+    /**
+     * Make a get request to fetch related posts
+     *
+     * @param  {Object}     params
+     * @return {Promise}
+     */
+    getRelated(params) {
+        return Vue.resource('/api/beeasy/blog/related{/slug}').get(params);
+    },
 };
