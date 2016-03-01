@@ -7,7 +7,6 @@
         // Articles
         //
         article {
-
             header {
                 flex-wrap: wrap;
                 justify-content: space-between;
@@ -24,9 +23,7 @@
             }
 
             a { text-decoration: underline }
-
-            div.post-content *:not(:last-child) { margin-bottom: 24px }
-
+            div.post-content * { margin-bottom: 24px }
             div.gallery {
                 align-items: space-around;
                 display: flex;
@@ -64,6 +61,8 @@
         // Sidebar
         //
         aside {
+            background-color: $alternate-background-color;
+            border-top: 2px solid darken($alternate-background-color, 5%);
             flex-basis: 100%;
 
             h2 {
@@ -75,8 +74,8 @@
 </style>
 
 <template>
-    <main class="blog-show inner content">
-        <article>
+    <main class="blog-show inner">
+        <article class="content">
             <header>
                 <h1>{{ post.title }}</h1>
                 <time datetime="{{ post.published_at | moment }}">
@@ -86,7 +85,7 @@
             <div class="post-content" v-linkable>{{{ post.content_html }}}</div>
         </article>
         <aside>
-            <h2>Related</h2>
+            <h2 class="content">Related posts</h2>
             <v-blog-posts :posts="related"></v-blog-posts>
         </aside>
     </main>

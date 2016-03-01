@@ -110,7 +110,7 @@
                 this.isSearching = true;
                 BlogResource.get({ search: term }).then(response => {
                     this.isSearching = false;
-                    this.setPosts(response.data);
+                    this.posts = ParseBlogPosts(response);
                 });
             },
         },
