@@ -55,6 +55,10 @@
                 height: auto;
                 width: 100%;
             }
+
+            @include bp(tablet) {
+                width: 75%;
+            }
         }
 
         //
@@ -68,6 +72,15 @@
             h2 {
                 height: $header-height-mobile;
                 line-height: $header-height-mobile;
+            }
+
+            @include bp(tablet) {
+                background-color: #fff;
+                flex-basis: 25%;
+                li {
+                    flex-basis: 100% !important;
+                    max-width: none;
+                }
             }
         }
     }

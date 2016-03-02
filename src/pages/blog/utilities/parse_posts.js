@@ -7,7 +7,6 @@
 module.exports = function ({ data }) {
     return data.map(post => {
         post.thumbnail = { path: null, alt: null };
-
         if (post.featured_images.length > 0) {
             let img = post.featured_images[0];
             post.thumbnail.path = img.path;
