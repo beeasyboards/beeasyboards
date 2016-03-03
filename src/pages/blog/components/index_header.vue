@@ -25,7 +25,7 @@
         padding: $layout-padding-mobile;
         height: $header-height-mobile;
         line-height: $header-height-mobile;
-        @include transition('margin-top, opacity, width', 450ms);
+        @include transition('margin-top, opacity, width', 350ms);
 
         &.is-searching {
             margin-top: 0;

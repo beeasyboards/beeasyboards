@@ -1,15 +1,69 @@
-<style lang="sass" scoped> @import 'core';
-    main.blog-show {
+<style lang="sass"> @import 'core';
 
+    main.blog-show {
+        display: flex;
+        flex-wrap: wrap;
+        @include bp(tablet) {
+            flex-wrap: nowrap;
+        }
     }
 
-    header {
+    //
+    // Header
+    //
+    .blog-show header {
         display: block !important;
-
+        padding: 24px 0;
         h1, time {
             display: block !important;
-            border: 1px solid blue;
             width: 100%;
+        }
+    }
+
+    //
+    // Article
+    //
+    .blog-show article {
+        @include bp-prop(flex-basis, 100%, 75%);
+
+        div.post-content {
+            > * {
+                border-radius: 3px;
+                margin-bottom: 24px;
+            }
+
+            blockquote {
+                margin: 0 12px 24px;
+                text-align: center;
+            }
+
+            img {
+                height: auto;
+                width: 100%;
+            }
+        }
+    }
+
+    //
+    // Aside
+    //
+    .blog-show aside {
+        @include bp-prop(background-color, $alternate-background-color, #fff);
+        @include bp-prop(border-top, 2px solid darken($alternate-background-color, 10%), none);
+        @include bp-prop(flex-basis, 100%, 25%);
+
+        h2 {
+            margin: 24px 0;
+        }
+
+        @include bp(tablet) {
+            ul {
+                flex-wrap: wrap;
+            }
+            li {
+                flex-basis: 100% !important;
+                max-width: none;
+            }
         }
     }
 </style>
