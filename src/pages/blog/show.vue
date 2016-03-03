@@ -1,87 +1,15 @@
-<style lang="sass"> @import 'core';
+<style lang="sass" scoped> @import 'core';
     main.blog-show {
-        display: flex;
-        flex-wrap: wrap;
 
-        //
-        // Articles
-        //
-        article {
-            header {
-                flex-wrap: wrap;
-                justify-content: space-between;
-                flex-basis: 100%;
+    }
 
-                @include bp(tablet) {
-                    flex-wrap: nowrap;
-                    h1 { flex-basis: auto }
-                    time {
-                        flex-basis: auto;
-                        padding-top: 12px;
-                    }
-                }
-            }
+    header {
+        display: block !important;
 
-            a { text-decoration: underline }
-            div.post-content * { margin-bottom: 24px }
-            div.gallery {
-                align-items: space-around;
-                display: flex;
-                margin: -12px;
-                @include bp-prop(flex-wrap, wrap, nowrap);
-
-                div {
-                    font-size: 0; // remove whitespace
-                    margin-bottom: 0 !important;
-                    padding: 12px;
-                    flex-basis: 100%;
-                }
-                img { width: 100%; height: auto; }
-                + div.gallery { margin-top: -24px !important }
-            }
-
-            blockquote {
-                text-align: center;
-                @include bp-prop(margin, 0px 12px 24px, 0px 24px 24px);
-                p {
-                    font-size: 1.5rem;
-                    margin-bottom: 6px !important;
-                }
-            }
-
-            img, div.video-wrapper { border-radius: 3px }
-
-            img {
-                height: auto;
-                width: 100%;
-            }
-
-            @include bp(tablet) {
-                width: 75%;
-            }
-        }
-
-        //
-        // Sidebar
-        //
-        aside {
-            background-color: $alternate-background-color;
-            border-top: 2px solid darken($alternate-background-color, 5%);
-            flex-basis: 100%;
-
-            h2 {
-                height: $header-height-mobile;
-                line-height: $header-height-mobile;
-            }
-
-            @include bp(tablet) {
-                background-color: #fff;
-                flex-basis: 25%;
-                li {
-                    flex-basis: 100% !important;
-                    max-width: none;
-                }
-            }
+        h1, time {
+            display: block !important;
+            border: 1px solid blue;
+            width: 100%;
         }
     }
 </style>
@@ -95,7 +23,9 @@
                     {{ post.published_at | moment 'MMM DD, YYYY' }}
                 </time>
             </header>
-            <div class="post-content" v-linkable>{{{ post.content_html }}}</div>
+            <div class="post-content" v-linkable>
+                {{{ post.content_html }}}
+            </div>
         </article>
         <aside>
             <h2 class="content">Related posts</h2>
