@@ -1,5 +1,4 @@
 <style lang="sass"> @import 'core';
-
     main.blog-show {
         display: flex;
         flex-wrap: wrap;
@@ -80,6 +79,7 @@
             <div class="post-content" v-linkable>
                 {{{ post.content_html }}}
             </div>
+            <v-disqus></v-disqus>
         </article>
         <aside>
             <h2 class="content">Related posts</h2>
@@ -90,6 +90,7 @@
 
 <script>
     import BlogResource from 'resources/blog';
+    import DisqusComponent from './components/disqus';
     import BlogPostsComponent from './components/posts';
     import ParseBlogPosts from './utilities/parse_posts.js';
 
@@ -136,6 +137,7 @@
          */
         components: {
             'v-blog-posts': BlogPostsComponent,
+            'v-disqus': DisqusComponent,
         },
     };
 </script>
