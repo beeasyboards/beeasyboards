@@ -13,7 +13,7 @@ module.exports = {
     config: {
         hashbang: false,
         history: true,
-        saveScrollPosition: true,
+        saveScrollPosition: false,
     },
 
     /**
