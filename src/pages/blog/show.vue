@@ -40,6 +40,17 @@
                 height: auto;
                 width: 100%;
             }
+
+            // Flexible rows and columns
+            div.flex-row {
+                display: flex;
+                @include bp-prop(flex-wrap, wrap, nowrap);
+                > div.flex-col, > div.flex-column {
+                    flex-basis: 100%;
+                    &:not(:first-child) { @include bp-prop(padding-left, 0, 12px) }
+                    &:not(:last-child) { @include bp-prop(padding-right, 0, 12px) }
+                }
+            }
         }
     }
 
