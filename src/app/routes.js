@@ -5,7 +5,9 @@ module.exports = {
      *
      * @type {Object}
      */
-    redirects: { },
+    redirects: {
+        '/downforlife': '/down-for-life',
+    },
 
     /**
      * Routes
@@ -33,6 +35,14 @@ module.exports = {
         '/blog/:slug': {
             name: 'blog-show',
             component: require('pages/blog/show'),
+        },
+
+        //
+        // Down for life
+        //
+        '/down-for-life': {
+            name: 'downforlife',
+            component: require('pages/downforlife'),
         },
 
         //
