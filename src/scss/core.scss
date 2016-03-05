@@ -2,6 +2,8 @@
 // Config
 //
 $breakpoints: (
+    phone: 'min-width: 320px',
+    large-phone: 'min-width: 481px',
     tablet: 'min-width: 768px',
     desktop: 'min-width: 1024px',
 );
