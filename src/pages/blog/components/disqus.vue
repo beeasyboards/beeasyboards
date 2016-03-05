@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    var disqusIsFetched = false;
+    let disqusIsFetched = false;
 
     module.exports = {
 
