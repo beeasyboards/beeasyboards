@@ -90,7 +90,7 @@
             <div class="post-content" v-linkable>
                 {{{ post.content_html }}}
             </div>
-            <v-disqus></v-disqus>
+            <v-disqus :id="post.id" :title="post.title"></v-disqus>
         </article>
         <aside>
             <h2 class="content">Related posts</h2>
