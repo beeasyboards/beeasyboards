@@ -18,48 +18,44 @@
         flex-basis: 100%;
         flex-grow: 1;
         margin-bottom: 30px;
-        @include bp($post-mobile) { flex-basis: 50% }
+        @include bp(large-phone) { flex-basis: 50% }
         @include bp(tablet) { flex-basis: 33.3333% }
         @include bp(desktop) { flex-basis: 25% }
         @include bp-prop(max-width, none, 50%);
         @include bp-prop(padding, 0 $post-spacing-mobile, 0 $post-spacing-tablet / 2);
 
         // The first two posts should be larger
-        &:nth-of-type(-n + 2) { @include bp($post-mobile) { flex-basis: 50% } }
+        &:nth-of-type(-n + 2) {
+            @include bp(large-phone) { flex-basis: 50% }
+        }
     }
 
-    a {
-        display: block;
-        &:hover { img { filter: brightness(100%) } }
-    }
-
-    img {
-        border-radius: 3px;
-        filter: brightness(90%);
-        height: auto;
-        width: 100%;
-        @include transition(filter);
-    }
-
-    div.subtitle { font-size: 14px }
 </style>
 
 <template>
     <ul>
         <li v-for="post in posts">
-            <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
-                <img :src="post.thumbnail.path" alt="{{ post.thumbnail.alt }}">
-                <h3>{{ post.title }}</h3>
-                <div class="subtitle">{{ post.subtitle }}</div>
-            </a>
+            <v-thumbnail :post="post"></v-thumbnail>
         </li>
     </ul>
 </template>
 
 <script>
+    import ThumbnailComponent from './thumbnail';
+
     module.exports = {
 
+        /**
+         * @type {Array}
+         */
         props: ['posts'],
+
+        /**
+         * @type {Object}
+         */
+        components: {
+            'v-thumbnail': ThumbnailComponent,
+        },
 
     };
 </script>
