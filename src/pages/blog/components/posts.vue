@@ -6,10 +6,10 @@
     ul {
         display: flex;
         flex-wrap: wrap;
-        list-style: none;
         justify-content: space-around;
-        width: 100%;
+        list-style: none;
         margin: 0;
+        width: 100%;
         @include bp-prop(padding, 0 6px, 0);
         @include transition(opacity);
     }
