@@ -21,7 +21,7 @@ module.exports = {
         //
         '/': {
             name: 'home',
-            component: require('pages/home'),
+            component: require('pages/home/index'),
         },
 
         //
