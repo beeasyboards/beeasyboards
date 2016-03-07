@@ -42,7 +42,7 @@ module.exports = {
         //
         '/down-for-life': {
             name: 'downforlife',
-            component: require('pages/downforlife'),
+            component: require('pages/downforlife/index'),
         },
 
         //
