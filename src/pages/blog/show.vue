@@ -23,6 +23,7 @@
     // Article
     //
     .blog-show article {
+        padding-bottom: 12px !important;
         @include bp-prop(flex-basis, 100%, 75%);
 
         div.post-content {
@@ -63,7 +64,7 @@
         @include bp-prop(flex-basis, 100%, 25%);
 
         h2 {
-            margin: 24px 0;
+            @include bp-prop(margin, 12px 0, 24px 0);
         }
 
         @include bp(tablet) {

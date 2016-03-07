@@ -22,9 +22,10 @@
         left: 0;
         width: 100%;
         opacity: 0;
-        padding: $layout-padding-mobile;
+        padding: 12px 12px 12px 6px;
         height: $header-height-mobile;
         line-height: $header-height-mobile;
+        @include bp-prop(padding, 12px 12px 12px 6px, 12px);
         @include transition('margin-top, opacity, width', 350ms);
 
         &.is-searching {

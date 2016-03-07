@@ -10,26 +10,25 @@
         justify-content: space-around;
         width: 100%;
         margin: 0;
-        padding: 0;
+        @include bp-prop(padding, 0 6px, 0);
         @include transition(opacity);
     }
 
     li {
         flex-basis: 100%;
         flex-grow: 1;
-        margin-bottom: 30px;
+        margin-bottom: 12px;
         @include bp(large-phone) { flex-basis: 50% }
         @include bp(tablet) { flex-basis: 33.3333% }
         @include bp(desktop) { flex-basis: 25% }
         @include bp-prop(max-width, none, 50%);
-        @include bp-prop(padding, 0 $post-spacing-mobile, 0 $post-spacing-tablet / 2);
+        @include bp-prop(padding, 0 $post-spacing-mobile / 2, 0 $post-spacing-tablet / 2);
 
         // The first two posts should be larger
         &:nth-of-type(-n + 2) {
             @include bp(large-phone) { flex-basis: 50% }
         }
     }
-
 </style>
 
 <template>
