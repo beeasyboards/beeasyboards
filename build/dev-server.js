@@ -31,7 +31,7 @@ browserSync({
     ],
     rewriteRules: [
         {
-            match: /<link href=\"\/themes\/beeasyboards\/dist\/app.(.*).css\" rel=\"stylesheet\">/ig,
+            match: /<link href=\"\/themes\/beeasyboards\/assets\/app.(.*).css\" rel=\"stylesheet\">/ig,
             fn: function(match) {
                 return '';
             }

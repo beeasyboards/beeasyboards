@@ -12,8 +12,8 @@ module.exports = {
         app: './src/main.js',
     },
     output: {
-        path: path.resolve(__dirname, '../dist'),
-        publicPath: '/themes/beeasyboards/dist/',
+        path: path.resolve(__dirname, '../assets'),
+        publicPath: '/themes/beeasyboards/assets/',
         filename: '[name].js',
     },
     resolve: {
