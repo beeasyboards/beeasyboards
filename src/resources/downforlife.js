@@ -10,7 +10,6 @@ module.exports = {
     /**
      * Fetch the homies
      *
-     * @param  {Object}     params
      * @return {Promise}
      */
     get() {
