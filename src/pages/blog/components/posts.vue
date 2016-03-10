@@ -55,6 +55,5 @@
         components: {
             'v-thumbnail': ThumbnailComponent,
         },
-
     };
 </script>

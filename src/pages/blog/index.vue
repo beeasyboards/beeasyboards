@@ -26,7 +26,6 @@
     import BlogResource from 'resources/blog';
     import BlogPostsComponent from './components/posts';
     import IndexHeaderComponent from './components/index_header';
-    import ParseBlogPosts from './utilities/parse_posts.js';
 
     module.exports = {
 
@@ -86,7 +85,9 @@
              * @return {Promise}
              */
             data(transition) {
-                return BlogResource.get().then(response => this.$set('posts', ParseBlogPosts(response)));
+                return this.$resources({
+                    posts: BlogResource.get(),
+                });
             },
         },
 
@@ -106,11 +107,9 @@
                     return;
                 }
 
-                this.lastSearch = term;
-                this.isSearching = true;
                 BlogResource.get({ search: term }).then(response => {
                     this.isSearching = false;
-                    this.posts = ParseBlogPosts(response);
+                    this.posts = response.data
                 });
             },
         },

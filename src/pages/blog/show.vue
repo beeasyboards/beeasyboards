@@ -104,7 +104,6 @@
     import BlogResource from 'resources/blog';
     import DisqusComponent from './components/disqus';
     import BlogPostsComponent from './components/posts';
-    import ParseBlogPosts from './utilities/parse_posts.js';
 
     module.exports = {
 
@@ -134,13 +133,10 @@
              * @return {Promise}
              */
             data(transition) {
-                let Post = BlogResource.get(this.$route.params)
-                    .then(response => this.$set('post', response.data));
-
-                let Related = BlogResource.getRelated(this.$route.params)
-                    .then(response => this.$set('related', ParseBlogPosts(response)));
-
-                return Promise.all([ Post, Related ]);
+                return this.$resources({
+                    post: BlogResource.get(this.$route.params),
+                    related: BlogResource.getRelated(this.$route.params),
+                });
             },
         },
 

@@ -18,6 +18,15 @@ module.exports = {
     },
 
     /**
+     * Fetch the most recent posts
+     *
+     * @return {Object}
+     */
+    getRecent() {
+        return Vue.resource('/api/beeasy/blog/recent').get();
+    },
+
+    /**
      * Make a get request to fetch related posts
      *
      * @param  {Object}     params

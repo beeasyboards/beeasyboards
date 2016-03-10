@@ -22,7 +22,7 @@
 
 <template>
     <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
-        <img :src="post.thumbnail.path" alt="{{ post.thumbnail.alt }}">
+        <img :src="src" :alt="post.title">
         <h3>{{ post.title }}</h3>
         <div>{{ post.subtitle }}</div>
     </a>
@@ -35,5 +35,22 @@
          * @type {Array}
          */
         props: ['post'],
+
+        /**
+         * @type {Object}
+         */
+        computed: {
+
+            /**
+             * Use the first image as our thumbnail
+             *
+             * @return {String}
+             */
+            src() {
+                return typeof this.post.featured_images !== 'undefined' && this.post.featured_images.length > 0
+                    ? this.post.featured_images[0].path
+                    : 'error.jpg'; // @todo, provide error image
+            },
+        },
     };
 </script>

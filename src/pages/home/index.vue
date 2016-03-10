@@ -31,11 +31,44 @@
 </template>
 
 <script>
+    import BlogResource from 'resources/blog';
     import SliderComponent from './components/slider';
     import RecentPostsComponent from './components/recentPosts';
     import FeaturedProductsComponent from './components/featuredProducts';
 
     module.exports = {
+
+        /**
+         * @return {[Object]}
+         */
+        data() {
+            return {
+                recentPosts: {},
+            };
+        },
+
+        /**
+         * @type {Object}
+         */
+        route: {
+
+            /**
+             * @type {Boolean}
+             */
+            waitForData: true,
+
+            /**
+             * Fetch route data
+             *
+             * @param  {Object}     transition
+             * @return {Promise}
+             */
+            data(transition) {
+                return this.$resources({
+                    recentPosts: BlogResource.getRecent(),
+                });
+            },
+        },
 
         /**
          * @type {Object}
