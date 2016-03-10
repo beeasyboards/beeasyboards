@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import ParseBlogPosts from 'pages/blog/utilities/parse_posts.js';
 import DisqusComponent from 'pages/blog/components/disqus';
 import ThumbnailComponent from 'pages/blog/components/thumbnail';
 
