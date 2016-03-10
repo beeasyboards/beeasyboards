@@ -10,8 +10,8 @@ module.exports = {
     install(Vue, options) {
 
         // Register global methods
-        Object.keys(this.methods).forEach(resource => {
-            Vue.prototype['$' + resource] = this.methods[resource]
+        Object.keys(this.methods).forEach(method => {
+            Vue.prototype['$' + method] = this.methods[method]
         });
     },
 
