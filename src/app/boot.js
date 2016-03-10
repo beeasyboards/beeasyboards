@@ -3,7 +3,7 @@ import Vue from 'vue';
 //
 // Plugins
 //
-Vue.use(require('./plugins/sourceable'));
+Vue.use(require('./plugins/resources'));
 
 //
 // Directives
