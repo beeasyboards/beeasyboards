@@ -1,8 +1,4 @@
 //
-// Components
-//
-
-//
 // Directives
 //
 require('./directives/linkable');
@@ -11,8 +7,3 @@ require('./directives/linkable');
 // Filters
 //
 require('./filters/moment');
-
-//
-// Transitions
-//
-require('./transitions/animatecss');
