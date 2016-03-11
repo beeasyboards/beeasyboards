@@ -1,5 +1,19 @@
 <style lang="sass">
-@import 'src/style';
+    @import './scss/core';
+
+    //
+    // Global styles
+    //
+    @import 'normalize.scss/normalize.scss';
+    @import 'transitions';
+
+    //
+    // Elements
+    //
+    @import 'elements/containers';
+    @import 'elements/media';
+    @import 'elements/typography';
+    @import 'elements/ui';
 </style>
 
 <template>
