@@ -15,7 +15,7 @@
 </style>
 
 <template>
-    <ul class="v-blog-posts" v-if="posts.length > 0">
+    <ul class="v-blog-posts">
         <li v-for="post in posts">
             <v-post-preview :post="post"></v-post-preview>
         </li>
