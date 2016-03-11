@@ -25,7 +25,7 @@
 <template>
     <main class="inner">
         <v-slider class="slider"></v-slider>
-        <v-recent-posts class="recent-posts"></v-recent-posts>
+        <v-recent-posts :posts="recentPosts" class="recent-posts"></v-recent-posts>
         <v-featured-products class="featured-products"></v-featured-products>
     </main>
 </template>
@@ -33,7 +33,7 @@
 <script>
     import BlogResource from 'resources/blog';
     import SliderComponent from './components/slider';
-    import RecentPostsComponent from './components/recentPosts';
+    import RecentPostsComponent from './components/recent_posts';
     import FeaturedProductsComponent from './components/featuredProducts';
 
     module.exports = {

@@ -22,7 +22,7 @@
 
 <template>
     <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
-        <img :src="src" :alt="post.title">
+        <img v=if="src" :src="src" :alt="post.title">
         <h3>{{ post.title }}</h3>
         <div>{{ post.subtitle }}</div>
     </a>
@@ -49,7 +49,7 @@
             src() {
                 return typeof this.post.featured_images !== 'undefined' && this.post.featured_images.length > 0
                     ? this.post.featured_images[0].path
-                    : 'error.jpg'; // @todo, provide error image
+                    : null;
             },
         },
     };

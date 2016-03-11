@@ -66,16 +66,12 @@
         h2 {
             @include bp-prop(margin, 12px 0, 24px 0);
         }
+    }
 
-        @include bp(tablet) {
-            ul {
-                flex-wrap: wrap;
-            }
-            li {
-                flex-basis: 100% !important;
-                max-width: none;
-            }
-        }
+    li {
+        flex-basis: 100%;
+        @include bp(large-phone) { flex-basis: 50% }
+        @include bp(tablet) { flex-basis: 100% }
     }
 </style>
 
@@ -93,8 +89,8 @@
             </div>
             <v-disqus :id="post.id" :title="post.title"></v-disqus>
         </article>
-        <aside>
-            <h2 class="content">Related posts</h2>
+        <aside class="content">
+            <h2>Related posts</h2>
             <v-blog-posts :posts="related"></v-blog-posts>
         </aside>
     </main>

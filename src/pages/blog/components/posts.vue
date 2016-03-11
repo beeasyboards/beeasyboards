@@ -1,46 +1,29 @@
 <style lang="sass" scoped> @import 'core';
-    $post-mobile: 'min-width: 376px';
-    $post-spacing-mobile: 12px;
-    $post-spacing-tablet: 24px;
-
     ul {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
         list-style: none;
-        margin: 0;
-        width: 100%;
-        @include bp-prop(padding, 0 6px, 0);
-        @include transition(opacity);
+        padding: 0;
+        @include bp-prop(margin, -6px, -12px);
+        @include transition(margin);
     }
 
     li {
-        flex-basis: 100%;
-        flex-grow: 1;
-        margin-bottom: 12px;
-        @include bp(large-phone) { flex-basis: 50% }
-        @include bp(tablet) { flex-basis: 33.3333% }
-        @include bp(desktop) { flex-basis: 25% }
-        @include bp-prop(max-width, none, 50%);
-        @include bp-prop(padding, 0 $post-spacing-mobile / 2, 0 $post-spacing-tablet / 2);
-
-        // The first two posts should be larger
-        &:nth-of-type(-n + 2) {
-            @include bp(large-phone) { flex-basis: 50% }
-        }
+        @include bp-prop(padding, 6px, 12px);
+        @include transition('flex-basis, padding');
     }
 </style>
 
 <template>
-    <ul>
+    <ul class="v-blog-posts" v-if="posts.length > 0">
         <li v-for="post in posts">
-            <v-thumbnail :post="post"></v-thumbnail>
+            <v-post-preview :post="post"></v-post-preview>
         </li>
     </ul>
 </template>
 
 <script>
-    import ThumbnailComponent from './thumbnail';
+    import PostPreviewComponent from './post_preview';
 
     module.exports = {
 
@@ -53,7 +36,7 @@
          * @type {Object}
          */
         components: {
-            'v-thumbnail': ThumbnailComponent,
+            'v-post-preview': PostPreviewComponent,
         },
     };
 </script>
