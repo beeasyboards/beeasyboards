@@ -8,8 +8,6 @@ module.exports = {
      * @return {void}
      */
     install(Vue, options) {
-
-        // Register global methods
         Object.keys(this.methods).forEach(method => {
             Vue.prototype['$' + method] = this.methods[method]
         });
