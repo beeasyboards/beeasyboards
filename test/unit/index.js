@@ -1,3 +1,9 @@
+//
+// Vue
+//
+import Vue from 'vue';
+Vue.directive('link', {});
+
 // Polyfill fn.bind() for PhantomJS
 /* eslint-disable no-extend-native */
 Function.prototype.bind = require('function-bind')
