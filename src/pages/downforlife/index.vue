@@ -64,7 +64,9 @@
              * @return {Promise}
              */
             data(transition) {
-                return DownForLifeResource.get().then(response => this.$set('homies', response.data));
+                return this.$resources({
+                    homies: DownForLifeResource.get(),
+                })
             },
         },
 
