@@ -24,7 +24,7 @@
         <ul>
             <li v-for="homie in homies">
                 <a v-if="homie.href" href="{{ homie.href }}" @click.prevent>
-                    <v-homie @homie-tapped="onHomieTapped" :homie="homie"></v-homie>
+                    <v-homie :homie="homie"></v-homie>
                 </a>
                 <v-homie v-else :homie="homie"></v-homie>
             </li>
