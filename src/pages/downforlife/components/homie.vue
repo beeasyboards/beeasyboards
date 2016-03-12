@@ -27,12 +27,12 @@
         align-items: center;
         color: #eee;
         display: flex;
+        font-weight: 300 !important;
         flex-direction: column;
         justify-content: center;
         opacity: 0;
         position: absolute;
         z-index: 1;
-        font-weight: 300 !important;
         @include transition(opacity);
     }
 
@@ -55,10 +55,9 @@
     <div
         class="square"
         @click.prevent="onClick"
-        @tap="onTap"
-        v-bind:class="{ 'is-mobile': this.$isMobile }"
         v-touch:tap="onTap"
         v-touch:doubletap="onDoubleTap"
+        v-bind:class="{ 'is-mobile': this.$isMobile }"
     >
         <img v-if="hasImage" :src="homie.image.path">
         <div class="caption" v-bind:class="{ 'is-tapped': isTapped }">
@@ -79,6 +78,9 @@
          */
         props: ['homie'],
 
+        /**
+         * @return {Object}
+         */
         data() {
             return {
                 isTapped: false,
