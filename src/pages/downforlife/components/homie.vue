@@ -108,6 +108,19 @@
         methods: {
 
             /**
+             * Disable our sibling captions
+             *
+             * @return {void}
+             */
+            disableSiblingCaptions() {
+                this.$parent.$children.forEach(sibling => {
+                    if (sibling !== this) {
+                        sibling.isTapped = false
+                    }
+                });
+            },
+
+            /**
              * Navigate to the homie's page
              *
              * @return {void}
@@ -145,20 +158,14 @@
             },
 
             /**
-             * Disable sibling captions, and toggle our own
+             * Disable all other homie captions, and toggle our own
              *
              * @return {void}
              */
             onTap() {
                 if (this.$isMobile) {
+                    this.disableSiblingCaptions();
                     this.isTapped = !this.isTapped;
-
-                    // Disable the caption of sibling components
-                    this.$parent.$children.forEach(sibling => {
-                        if (sibling !== this) {
-                            sibling.isTapped = false
-                        }
-                    });
                 }
             },
         },
