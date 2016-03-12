@@ -15,5 +15,8 @@ module.exports = function (config) {
         webpackMiddleware: {
             noInfo: true,
         },
+        proxies: {
+            '/test.png': 'https://placeholdit.imgix.net/~text?w=1&h=1',
+        },
     });
 };

@@ -3,6 +3,8 @@
 //
 import Vue from 'vue';
 Vue.directive('link', {});
+Vue.directive('touch', {});
+Vue.filter('moment', {});
 
 // Polyfill fn.bind() for PhantomJS
 /* eslint-disable no-extend-native */

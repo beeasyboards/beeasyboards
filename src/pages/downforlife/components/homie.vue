@@ -10,6 +10,12 @@
         padding-bottom: 100%;
         position: relative;
         width: 100%;
+
+        .caption.is-tapped,
+        &:not(.is-mobile) .caption:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 1;
+        }
     }
 
     img, .caption {
@@ -28,11 +34,6 @@
         z-index: 1;
         font-weight: 300 !important;
         @include transition(opacity);
-
-        &:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            opacity: 1;
-        }
     }
 
     .name {
@@ -51,9 +52,16 @@
 </style>
 
 <template>
-    <div class="square">
-        <img :src="getImgPath(homie)">
-        <div class="caption">
+    <div
+        class="square"
+        @click.prevent="onClick"
+        @tap="onTap"
+        v-bind:class="{ 'is-mobile': this.$isMobile }"
+        v-touch:tap="onTap"
+        v-touch:doubletap="onDoubleTap"
+    >
+        <img v-if="hasImage" :src="homie.image.path">
+        <div class="caption" v-bind:class="{ 'is-tapped': isTapped }">
             <div class="name">{{ homie.name }}</div>
             <div class="down-since">Down since</div>
             <time datetime="{{ homie.created_at | moment }}">
@@ -71,14 +79,87 @@
          */
         props: ['homie'],
 
+        data() {
+            return {
+                isTapped: false,
+            };
+        },
+
+        /**
+         * @type {Object}
+         */
+        computed: {
+
+            /**
+             * Check if the homie has an image
+             *
+             * @return {Boolean}
+             */
+            hasImage() {
+                return typeof this.homie !== 'undefined' &&
+                    typeof this.homie.image !== 'undefined' &&
+                    typeof this.homie.image.path !== 'undefined';
+            },
+        },
+
         /**
          * @type {Object}
          */
         methods: {
-            getImgPath(homie) {
-                return typeof homie.image.path !== 'undefined'
-                    ? homie.image.path
-                    : 'error.jpg';
+
+            /**
+             * Navigate to the homie's page
+             *
+             * @return {void}
+             */
+            gotoHomie() {
+                if (!this.homie.href) {
+                    return;
+                } else if (this.homie.is_new_window) {
+                    window.open(this.homie.href);
+                } else {
+                    window.location.href = this.homie.href
+                }
+            },
+
+            /**
+             * Navigates desktop users to a homie's page
+             *
+             * @return {void}
+             */
+            onClick() {
+                if (!this.$isMobile) {
+                    this.gotoHomie();
+                }
+            },
+
+            /**
+             * Navigates mobile users to a homie's page
+             *
+             * @return {void}
+             */
+            onDoubleTap() {
+                if (this.$isMobile) {
+                    this.gotoHomie();
+                }
+            },
+
+            /**
+             * Disable sibling captions, and toggle our own
+             *
+             * @return {void}
+             */
+            onTap() {
+                if (this.$isMobile) {
+                    this.isTapped = !this.isTapped;
+
+                    // Disable the caption of sibling components
+                    this.$parent.$children.forEach(sibling => {
+                        if (sibling !== this) {
+                            sibling.isTapped = false
+                        }
+                    });
+                }
             },
         },
     };

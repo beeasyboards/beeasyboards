@@ -23,8 +23,8 @@
         <h1 class="content">Down for life</h1>
         <ul>
             <li v-for="homie in homies">
-                <a v-if="hasLink(homie)" href="{{ homie.href }}" :target="linkTarget(homie)">
-                    <v-homie :homie="homie"></v-homie>
+                <a v-if="homie.href" href="{{ homie.href }}" @click.prevent>
+                    <v-homie @homie-tapped="onHomieTapped" :homie="homie"></v-homie>
                 </a>
                 <v-homie v-else :homie="homie"></v-homie>
             </li>
@@ -75,32 +75,6 @@
          */
         components: {
             'v-homie': HomieComponent,
-        },
-
-        /**
-         * @type {Object}
-         */
-        methods: {
-
-            /**
-             * Check if the homie has an href to link to
-             *
-             * @param  {Object}     homie
-             * @return {Boolean}
-             */
-            hasLink(homie) {
-                return homie.href.length > 0;
-            },
-
-            /**
-             * Determines where to open the homie's link
-             *
-             * @param  {Object}     homie
-             * @return {String}
-             */
-            linkTarget(homie) {
-                return homie.is_new_window ? '_blank' : '_self';
-            },
         },
     };
 </script>

@@ -8,6 +8,7 @@ module.exports = {
             'vue',
             'vue-resource',
             'vue-router',
+            'vue-touch',
         ],
         app: './src/main.js',
     },
