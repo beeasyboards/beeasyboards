@@ -9,9 +9,13 @@
     }
 
     li {
-        flex-basis: 100%;
+        // IE 10 & 11 workaround for flex-basis and box-sizing
+        // github.com/philipwalton/flexbugs#7-flex-basis-doesnt-account-for-box-sizingborder-box
+        flex-basis: auto;
+        width: 100%;
+
         @include bp-prop(padding, 6px, 12px);
-        @include transition('flex-basis, padding');
+        @include transition('padding, width');
     }
 </style>
 

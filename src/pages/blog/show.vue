@@ -68,9 +68,8 @@
         }
 
         li {
-            flex-basis: 100%;
-            @include bp(large-phone) { flex-basis: 50% }
-            @include bp(tablet) { flex-basis: 100% }
+            @include bp(large-phone) { width: 50% }
+            @include bp(tablet) { width: 100% }
         }
     }
 </style>

@@ -43,13 +43,12 @@
     }
 
     .blog-index li {
-        flex-basis: 100%;
-        @include bp(large-phone) { flex-basis: 50% }
-        @include bp(tablet) { flex-basis: 33.3333% }
-        @include bp(desktop) { flex-basis: 25% }
+        @include bp(large-phone) { width: 50% }
+        @include bp(tablet) { width: 33.3333% }
+        @include bp(desktop) { width: 25% }
 
         &:nth-of-type(-n + 2) {
-            @include bp(tablet) { flex-basis: 50% }
+            @include bp(tablet) { width: 50% }
         }
     }
 </style>

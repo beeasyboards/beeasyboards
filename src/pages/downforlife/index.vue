@@ -8,13 +8,14 @@
     }
 
     li {
-        flex-basis: 100%;
+        flex-basis: auto;
         padding: 6px;
-        @include bp(phone) { flex-basis: 50% }
-        @include bp(large-phone) { flex-basis: 33.3333% }
-        @include bp(tablet) { flex-basis: 25% }
-        @include bp(desktop) { flex-basis: 20% }
-        @include transition(flex-basis);
+        width: 100%;
+        @include bp(phone) { width: 50% }
+        @include bp(large-phone) { width: 33.3333% }
+        @include bp(tablet) { width: 25% }
+        @include bp(desktop) { width: 20% }
+        @include transition(width);
     }
 </style>
 
