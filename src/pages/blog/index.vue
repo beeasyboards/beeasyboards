@@ -17,24 +17,13 @@
     }
 
     .blog-index input {
-        position: absolute;
         left: 12px;
-        width: calc(100% - 24px);
-        transform: translateY(-50%);
         top: -50%;
-        opacity: 0;
+        @include bp-prop(opacity, 0, 1);
+        @include bp-prop(position, absolute, static);
+        @include bp-prop(transform, translateY(-50%), none);
+        @include bp-prop(max-width, calc(100% - 24px), calc(50% - 12px), calc(25% - 12px));
         @include transition('max-width, opacity, top', 350ms);
-
-        @include bp(tablet) {
-            opacity: 1;
-            position: static;
-            transform: none;
-            max-width: 50%;
-        }
-
-        @include bp(desktop) {
-            max-width: 25%;
-        }
     }
 
     .blog-index .is-searching input {
@@ -61,48 +50,37 @@
 
         &:nth-of-type(-n + 2) {
             @include bp(tablet) { flex-basis: 50% }
-            @include bp(desktop) { flex-basis: 50% }
         }
     }
 </style>
 
 <template>
     <main class="blog-index inner">
-        <section class="header content" :class="{ 'is-searching': isSearching }" v-clickoff="onClickOff">
+        <section class="header content" :class="{ 'is-searching': isSearching }">
             <h1>{{ header }}</h1>
             <input
-                v-el:search
-                @blur="onSearchBlurred"
+                debounce="300"
+                placeholder="Search"
                 type="search"
-                placeholder="Search" />
+                v-el:search
+                v-model="search"
+                @blur="onSearchBlur"
+                @keypress.enter="onSearchEnter"
+            />
             <i @click="onSearchClicked" class="fa fa-btn fa-search"></i>
         </section>
         <section class="results">
-            <v-blog-posts :posts="posts"></v-blog-posts>
+            <v-blog-posts :posts="posts" v-if="posts.length"></v-blog-posts>
+            <p v-else>Sorry homie, we didn't find anything.</p>
         </section>
     </main>
 </template>
 
 <script>
     import BlogResource from 'resources/blog';
-    import BlogPostsComponent from './components/posts';
+    import PostsComponent from './components/posts';
 
     module.exports = {
-
-        /**
-         * @type {Object}
-         */
-        watch: {
-            isSearching(isSearching) {
-                // if (!this.$isMobile) {
-                //     return;
-                // }
-
-                this.$el.addEventListener('click', () => {
-                    console.log ('clicked');
-                })
-            }
-        },
 
         /**
          * @return {Object}
@@ -110,9 +88,8 @@
         data() {
             return {
                 isSearching: false,
-                lastSearch: '',
                 posts: [],
-                searchIsExpanded: false,
+                search: this.$route.query.search,
             };
         },
 
@@ -143,7 +120,7 @@
          * @type {Object}
          */
         components: {
-            'v-blog-posts': BlogPostsComponent,
+            'v-blog-posts': PostsComponent,
         },
 
         /**
@@ -157,12 +134,33 @@
              * @return {String}
              */
             header() {
-                if (this.lastSearch.length === 0) {
-                    return 'Blog';
+                if (this.search) {
+                    let search = this.search.trim().toLowerCase();
+
+                    if (search) {
+                        return `"${ search }"`;
+                    }
                 }
 
-                let isPlural = this.posts.length !== 1;
-                return this.posts.length + ' ' + (isPlural ? 'results' : 'result');
+                return 'Blog';
+            },
+        },
+
+        /**
+         * @type {Object}
+         */
+        watch: {
+
+            /**
+             * Update the query string and search the blog
+             *
+             * @param  {String} term
+             * @return {void}
+             */
+            search(term) {
+                let search = term.trim().toLowerCase() || null, query = { search };
+                this.$resources({ posts: BlogResource.get(query) });
+                this.$router.replace({ name: 'blog-index', query });
             },
         },
 
@@ -170,33 +168,6 @@
          * @type {Object}
          */
         methods: {
-
-            /**
-             * Blur the search box
-             *
-             * @return {[type]} [description]
-             */
-            onClickOff(e) {
-                console.log ('on click off', e);
-                e.stopPropagation();
-            },
-
-            /**
-             * Search the blog for a given term
-             *
-             * @param  {String} term    The term being search for
-             * @return {void}
-             */
-            search(term) {
-                if (term.length === 0) {
-                    term = null;
-                }
-
-                this.$router.go({
-                    name: 'blog-list',
-                    query: { search: term },
-                });
-            },
 
             /**
              * Show and focus the search input
@@ -213,8 +184,19 @@
              *
              * @return {void}
              */
-            onSearchBlurred() {
+            onSearchBlur() {
                 this.isSearching = false;
+            },
+
+            /**
+             * Blur the input on enter for mobile users
+             *
+             * @return {void}
+             */
+            onSearchEnter() {
+                if (this.$isMobile) {
+                    this.$els.search.blur();
+                }
             },
         },
     };
