@@ -66,12 +66,12 @@
         h2 {
             @include bp-prop(margin, 12px 0, 24px 0);
         }
-    }
 
-    li {
-        flex-basis: 100%;
-        @include bp(large-phone) { flex-basis: 50% }
-        @include bp(tablet) { flex-basis: 100% }
+        li {
+            flex-basis: 100%;
+            @include bp(large-phone) { flex-basis: 50% }
+            @include bp(tablet) { flex-basis: 100% }
+        }
     }
 </style>
 

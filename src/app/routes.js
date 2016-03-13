@@ -29,13 +29,7 @@ module.exports = {
         //
         '/blog': {
             name: 'blog-index',
-            component: require('pages/blog/index/index'),
-            subRoutes: {
-                '/': {
-                    name: 'blog-list',
-                    component: require('pages/blog/index/components/list'),
-                },
-            },
+            component: require('pages/blog/index'),
         },
 
         '/blog/:slug': {

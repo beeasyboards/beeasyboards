@@ -9,6 +9,7 @@
     }
 
     li {
+        flex-basis: 100%;
         @include bp-prop(padding, 6px, 12px);
         @include transition('flex-basis, padding');
     }
