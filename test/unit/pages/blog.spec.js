@@ -1,11 +1,29 @@
 import Vue from 'vue';
 import DisqusComponent from 'pages/blog/components/disqus';
+import IndexPage from 'pages/blog/index';
 import BlogPostsComponent from 'pages/blog/components/posts';
 
 //
 // Blog
 //
 describe('Blog', () => {
+
+    //
+    // Posts page
+    //
+    it('Should display a message when no search results exist', (done) => {
+        Vue.prototype.$route = { query: { search: null } };
+        let vm = new Vue(IndexPage).$mount();
+        expect(vm.$el.querySelectorAll('.results > ul').length).toBe(0);
+        expect(vm.$el.querySelectorAll('.results > p').length).toBe(1);
+
+        vm.posts = [{ title: 'foo' }];
+        vm.$nextTick(() => {
+            expect(vm.$el.querySelectorAll('.results > ul').length).toBe(1);
+            expect(vm.$el.querySelectorAll('.results > p').length).toBe(0);
+            done();
+        });
+    });
 
     //
     // Posts component
