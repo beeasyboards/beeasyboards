@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import DisqusComponent from 'pages/blog/components/disqus';
 import BlogPostsComponent from 'pages/blog/components/posts';
-import BlogListComponent from 'pages/blog/index/components/list';
 
 //
 // Blog
@@ -27,17 +26,6 @@ describe('Blog', () => {
         expect(vm.$el.querySelectorAll('ul').length).toBe(1);
         expect(vm.$el.querySelectorAll('p').length).toBe(0);
         expect(vm.$el.querySelectorAll('li').length).toBe(3);
-    });
-
-    it('Should render a message when no posts are found.', () => {
-        let vm = new Vue({
-            components: { test: BlogListComponent },
-            template: '<div><test :posts="posts"></test></div>',
-            data: { posts: [] },
-        }).$mount();
-
-        expect(vm.$el.querySelectorAll('ul').length).toBe(0);
-        expect(vm.$el.querySelectorAll('p').length).toBe(1);
     });
 
     //
