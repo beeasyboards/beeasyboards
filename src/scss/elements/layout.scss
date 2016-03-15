@@ -1,0 +1,55 @@
+//
+// Layout containers
+//
+main {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: $layout-width;
+
+    //
+    // All layout containers
+    //
+    > section, > aside {
+        flex-basis: auto;
+        width: 100%;
+
+        //
+        // Padded content
+        //
+        &.padded {
+            padding: 12px;
+        }
+
+        //
+        // Headers
+        //
+        header {
+            margin-bottom: 12px;
+            padding: 12px 0;
+        }
+
+        &.padded header {
+            margin-top: -12px;
+        }
+    }
+
+    //
+    // Content sections
+    //
+    > section {
+        @include bp(tablet) {
+            &.with-sidebar { width: 75% }
+        }
+    }
+
+    //
+    // Sidebars
+    //
+    > aside {
+        @include bp(tablet) {
+            padding-left: 0 !important;
+            width: 25%;
+        }
+    }
+}

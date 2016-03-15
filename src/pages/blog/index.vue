@@ -1,75 +1,59 @@
 <style lang="sass"> @import 'core';
-    .blog-index .header {
-        align-items: center;
+    //
+    // Header
+    //
+    .blog-index-component header {
         display: flex;
         justify-content: space-between;
-        overflow: hidden;
-        position: relative;
+        @include valign-parent();
+
+        input {
+            left: 0;
+            @include valign-child();
+            @include transition('opacity, top', 375ms, ease-in-out);
+            &:not(.is-searching) { top: -50% }
+        }
+
+        i.fa-search {
+
+        }
     }
 
-    .blog-index h1 {
-        opacity: 1;
-        @include transition(opacity);
-    }
+    //
+    // Blog posts
+    //
+    .blog-index-component .v-blog-posts {
+        margin-top: -24px;
 
-    .blog-index .is-searching h1 {
-        opacity: 0;
-    }
-
-    .blog-index input {
-        left: 12px;
-        top: -50%;
-        @include bp-prop(opacity, 0, 1);
-        @include bp-prop(position, absolute, static);
-        @include bp-prop(transform, translateY(-50%), none);
-        @include bp-prop(max-width, calc(100% - 24px), calc(50% - 12px), calc(25% - 12px));
-        @include transition('max-width, opacity, top', 350ms);
-    }
-
-    .blog-index .is-searching input {
-        opacity: 1;
-        top: 50%;
-    }
-
-    .blog-index i.fa-search {
-        color: #ccc;
-        cursor: pointer;
-        font-size: 24px;
-        @include bp-prop(display, block, none);
-    }
-
-    .blog-index .results {
-        padding: 0 12px 12px;
-    }
-
-    .blog-index li {
-        @include bp(large-phone) { width: 50% }
-        @include bp(tablet) { width: 33.3333% }
-        @include bp(desktop) { width: 25% }
-
-        &:nth-of-type(-n + 2) {
-            @include bp(tablet) { width: 50% }
+        li {
+            width: 100%;
+            &:nth-of-type(-n + 2) { min-width: 50% }
+            @include bp(large-phone) { width: 50% }
+            @include bp(tablet) { width: 33.3333% }
+            @include bp(desktop) { width: 25% }
+            @include transition(width);
         }
     }
 </style>
 
 <template>
-    <main class="blog-index inner">
-        <section class="header content" :class="{ 'is-searching': isSearching }">
-            <h1>{{ header }}</h1>
-            <input
-                debounce="300"
-                placeholder="Search"
-                type="search"
-                v-el:search
-                v-model="search"
-                @blur="onSearchBlur"
-                @keypress.enter="onSearchEnter"
-            />
-            <i @click="onSearchClicked" class="fa fa-btn fa-search"></i>
-        </section>
-        <section class="results">
-            <v-blog-posts :posts="posts" v-if="posts.length"></v-blog-posts>
+    <main class="blog-index-component">
+        <section class="padded">
+            <header>
+                <h1>{{ header }}</h1>
+                <input
+                    :class="{ 'is-searching': isSearching }"
+                    debounce="300"
+                    placeholder="Search"
+                    type="search"
+                    v-el:search
+                    v-model="search"
+                    @blur="onSearchBlur"
+                    @keypress.enter="onSearchEnter"
+                />
+                <i @click="onSearchClicked" class="fa fa-search"></i>
+            </header>
+            <v-blog-posts v-if="posts.length" :posts="posts"></v-blog-posts>
             <p v-else>Sorry homie, we didn't find anything.</p>
         </section>
     </main>

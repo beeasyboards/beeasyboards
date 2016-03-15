@@ -11,6 +11,7 @@
     // Elements
     //
     @import 'elements/containers';
+    @import 'elements/layout';
     @import 'elements/media';
     @import 'elements/typography';
     @import 'elements/ui';

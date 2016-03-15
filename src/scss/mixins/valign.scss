@@ -1,0 +1,21 @@
+/**
+ * Vertically centers a block of unknown size within its parent. The basic
+ * idea is to align the top edge with the center of the parent element.
+ * Then bump the child element up half its own height via transform.
+ *
+ * .foo {
+ *     @include valign-parent();
+ *     .bar {
+ *         @include valign-child();
+ *     }
+ * }
+ */
+@mixin valign-parent() {
+    position: relative;
+}
+
+@mixin valign-child() {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

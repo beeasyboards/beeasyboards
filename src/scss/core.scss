@@ -19,6 +19,9 @@ $layout-padding-mobile: 12px;
 $layout-padding-tablet: 12px;
 $layout-width: 1200px;
 
+$sidebar-width-mobile: 100%;
+$sidebar-width-tablet: 25%;
+
 //
 // Mixins
 //
@@ -27,4 +30,5 @@ $layout-width: 1200px;
 @import './mixins/padding';
 @import './mixins/props';
 @import './mixins/transition';
+@import './mixins/valign';
 

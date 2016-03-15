@@ -1,104 +1,37 @@
 <style lang="sass"> @import 'core';
-    main.blog-show {
-        display: flex;
-        flex-wrap: wrap;
-        @include bp(tablet) {
-            flex-wrap: nowrap;
-        }
-    }
-
-    //
-    // Header
-    //
     .blog-show header {
-        display: block !important;
-        padding: 24px 0;
-        h1, time {
-            display: block !important;
-            width: 100%;
-        }
+
     }
 
-    //
-    // Article
-    //
     .blog-show article {
-        padding-bottom: 12px !important;
-        @include bp-prop(flex-basis, 100%, 75%);
 
-        div.post-content {
-            > * {
-                border-radius: 3px;
-                margin-bottom: 24px;
-            }
-
-            blockquote {
-                margin: 0 12px 24px;
-                text-align: center;
-            }
-
-            img {
-                height: auto;
-                width: 100%;
-            }
-
-            // Flexible rows and columns
-            div.flex-row {
-                display: flex;
-                @include bp-prop(flex-wrap, wrap, nowrap);
-                > div.flex-col, > div.flex-column {
-                    flex-basis: 100%;
-                    &:not(:first-child) { @include bp-prop(padding-left, 0, 12px) }
-                    &:not(:last-child) { @include bp-prop(padding-right, 0, 12px) }
-                }
-            }
-        }
-    }
-
-    //
-    // Aside
-    //
-    .blog-show aside {
-        @include bp-prop(background-color, $alternate-background-color, #fff);
-        @include bp-prop(border-top, 2px solid darken($alternate-background-color, 10%), none);
-        @include bp-prop(flex-basis, 100%, 25%);
-
-        h2 {
-            @include bp-prop(margin, 12px 0, 24px 0);
-        }
-
-        li {
-            @include bp(large-phone) { width: 50% }
-            @include bp(tablet) { width: 100% }
-        }
     }
 </style>
 
 <template>
-    <main class="blog-show inner">
-        <article class="content">
+    <main class="blog-show">
+        <section class="padded with-sidebar">
             <header>
                 <h1>{{ post.title }}</h1>
                 <time datetime="{{ post.published_at | moment }}">
                     {{ post.published_at | moment 'MMM DD, YYYY' }}
                 </time>
             </header>
-            <div class="post-content" v-linkable>
+            <article class="post-content" v-linkable>
                 {{{ post.content_html }}}
-            </div>
+            </article>
             <v-disqus :id="post.id" :title="post.title"></v-disqus>
-        </article>
-        <aside class="content">
-            <h2>Related posts</h2>
-            <v-blog-posts :posts="related"></v-blog-posts>
-        </aside>
+        </section>
+        <v-blog-sidebar class="padded" :posts="related">
+            <h2 slot="header">Related posts</h2>
+        </v-blog-sidebar>
     </main>
 </template>
 
 <script>
     import BlogResource from 'resources/blog';
     import DisqusComponent from './components/disqus';
-    import BlogPostsComponent from './components/posts';
+    import BlogSidebarComponent from './components/sidebar';
 
     module.exports = {
 
@@ -139,7 +72,7 @@
          * @type {Object}
          */
         components: {
-            'v-blog-posts': BlogPostsComponent,
+            'v-blog-sidebar': BlogSidebarComponent,
             'v-disqus': DisqusComponent,
         },
     };

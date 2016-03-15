@@ -1,17 +1,16 @@
 <style lang="sass">@import 'core';
-    .recent-posts li {
-        border: 2px solid blue;
-        flex-basis: auto;
+    .blog-sidebar-component li {
         width: 100%;
-        @include bp(tablet) { width: 50% }
-        @include bp(desktop) { width: 100% }
+        @include bp(large-phone) { width: 50% }
+        @include bp(tablet) { width: 100% }
     }
 </style>
 
 <template>
-    <section class="recent-posts content">
-        <v-blog-posts :posts="posts"></v-blog-posts>
-    </section>
+    <aside>
+        <slot name="header"></slot>
+        <v-blog-posts :posts="posts" class="blog-sidebar-component"></v-blog-posts>
+    </aside>
 </template>
 
 <script>
