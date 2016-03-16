@@ -5,6 +5,7 @@
     .blog-index-component header {
         display: flex;
         justify-content: space-between;
+        overflow: hidden;
         @include valign-parent();
 
         input {
@@ -15,7 +16,12 @@
         }
 
         i.fa-search {
-
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            font-size: 30px;
+            justify-content: center;
+            padding: 0 12px;
         }
     }
 
