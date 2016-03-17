@@ -14,13 +14,13 @@ describe('Blog', () => {
     it('Should display a message when no search results exist', (done) => {
         Vue.prototype.$route = { query: { search: null } };
         let vm = new Vue(IndexPage).$mount();
-        expect(vm.$el.querySelectorAll('.results > ul').length).toBe(0);
-        expect(vm.$el.querySelectorAll('.results > p').length).toBe(1);
+        expect(vm.$el.querySelectorAll('section > ul').length).toBe(0);
+        expect(vm.$el.querySelectorAll('section > p').length).toBe(1);
 
         vm.posts = [{ title: 'foo' }];
         vm.$nextTick(() => {
-            expect(vm.$el.querySelectorAll('.results > ul').length).toBe(1);
-            expect(vm.$el.querySelectorAll('.results > p').length).toBe(0);
+            expect(vm.$el.querySelectorAll('section > ul').length).toBe(1);
+            expect(vm.$el.querySelectorAll('section > p').length).toBe(0);
             done();
         });
     });
