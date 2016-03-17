@@ -1,10 +1,10 @@
 <style lang="sass" scoped>@import 'core';
     ul {
         display: flex;
-        list-style: none;
-        padding: 0 12px 12px;
-        margin: -6px;
         flex-wrap: wrap;
+        list-style: none;
+        margin: -18px -6px;
+        padding: 0 12px;
     }
 
     li {
@@ -21,15 +21,19 @@
 
 <template>
     <main class="inner">
-        <h1 class="content">Down for life</h1>
-        <ul>
-            <li v-for="homie in homies">
-                <a v-if="homie.href" href="{{ homie.href }}" @click.prevent>
-                    <v-homie :homie="homie"></v-homie>
-                </a>
-                <v-homie v-else :homie="homie"></v-homie>
-            </li>
-        </ul>
+        <section>
+            <header>
+                <h1 class="content">Down for life</h1>
+            </header>
+            <ul>
+                <li v-for="homie in homies">
+                    <a v-if="homie.href" href="{{ homie.href }}" @click.prevent>
+                        <v-homie :homie="homie"></v-homie>
+                    </a>
+                    <v-homie v-else :homie="homie"></v-homie>
+                </li>
+            </ul>
+        </section>
     </main>
 </template>
 
