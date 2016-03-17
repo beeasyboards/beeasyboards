@@ -13,6 +13,7 @@
     @import 'elements/containers';
     @import 'elements/layout';
     @import 'elements/media';
+    @import 'elements/sections';
     @import 'elements/typography';
     @import 'elements/ui';
 </style>

@@ -1,0 +1,22 @@
+//
+// Section headers
+//
+section header {
+    align-items: center;
+    display: flex;
+    font-weight: 300 !important;
+    height: 72px;
+    margin: -12px 0 0 !important;
+    justify-content: space-between;
+
+    h1 {
+        height: 60px;
+        line-height: 60px;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @include bp-prop(font-size, 32px, 36px, 40px);
+    }
+}

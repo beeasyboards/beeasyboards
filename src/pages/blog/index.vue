@@ -1,27 +1,64 @@
 <style lang="sass"> @import 'core';
-    //
-    // Header
-    //
     .blog-index-component header {
-        display: flex;
-        justify-content: space-between;
-        overflow: hidden;
         @include valign-parent();
+    }
 
-        input {
-            left: 0;
-            @include valign-child();
-            @include transition('opacity, top', 375ms, ease-in-out);
-            &:not(.is-searching) { top: -50% }
+    .blog-index-component h1 {
+        padding-right: 72px;
+        @include bp(large-phone) { padding-right: 24px }
+    }
+
+    .blog-index-component input {
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: -100%;
+        transform: translateY(0%);
+        z-index: 1;
+        @include transition('opacity, top, transform, width', 375ms, ease-in-out);
+
+        &.is-searching {
+            opacity: 1;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        i.fa-search {
-            align-items: center;
-            cursor: pointer;
-            display: flex;
-            font-size: 30px;
-            justify-content: center;
-            padding: 0 12px;
+        @include bp(large-phone) {
+            opacity: 1;
+            position: static;
+            width: calc(50% - 6px);
+        }
+
+        @include bp(tablet) {
+            width: calc(50% - 12px);
+        }
+
+        @include bp(desktop) {
+            width: calc(25% - 18px);
+        }
+    }
+
+    .blog-index-component i.fa {
+        align-items: center;
+        color: #ccc;
+        cursor: pointer;
+        display: flex;
+        font-size: 30px;
+        height: 100%;
+        justify-content: center;
+        padding: 12px;
+        position: absolute;
+        right: -12px;
+        top: 0;
+        width: 72px;
+        z-index: 2;
+        @include transition(color);
+        @include bp(large-phone) {
+            display: none;
+        }
+
+        &.is-searching {
+            color: #666;
         }
     }
 
@@ -29,8 +66,6 @@
     // Blog posts
     //
     .blog-index-component .v-blog-posts {
-        margin-top: -24px;
-
         li {
             width: 100%;
             &:nth-of-type(-n + 2) { min-width: 50% }
@@ -57,7 +92,16 @@
                     @blur="onSearchBlur"
                     @keypress.enter="onSearchEnter"
                 />
-                <i @click="onSearchClicked" class="fa fa-search"></i>
+                <i
+                    v-if="!isSearching || search.length === 0"
+                    :class="{ 'is-searching': isSearching }"
+                    @click="onSearchClicked" class="fa fa-search">
+                </i>
+                <i
+                    v-else
+                    v-touch:tap="onClearClicked"
+                    class="fa fa-times">
+                </i>
             </header>
             <v-blog-posts v-if="posts.length" :posts="posts"></v-blog-posts>
             <p v-else>Sorry homie, we didn't find anything.</p>
@@ -158,6 +202,11 @@
          */
         methods: {
 
+            onClearClicked(e) {
+                this.search = '';
+                console.log ('did it');
+            },
+
             /**
              * Show and focus the search input
              *
@@ -173,8 +222,9 @@
              *
              * @return {void}
              */
-            onSearchBlur() {
+            onSearchBlur(e) {
                 this.isSearching = false;
+                console.log ('blur');
             },
 
             /**

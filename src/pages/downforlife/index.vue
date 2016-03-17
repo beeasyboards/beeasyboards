@@ -3,8 +3,8 @@
         display: flex;
         flex-wrap: wrap;
         list-style: none;
-        margin: -18px -6px;
-        padding: 0 12px;
+        margin: -6px;
+        padding: 0;
     }
 
     li {
@@ -21,9 +21,9 @@
 
 <template>
     <main class="inner">
-        <section>
+        <section class="padded">
             <header>
-                <h1 class="content">Down for life</h1>
+                <h1>Down for life</h1>
             </header>
             <ul>
                 <li v-for="homie in homies">
