@@ -39,6 +39,7 @@ module.exports = {
      * @return {void}
      */
     after({ from, to }) {
+        window.scrollTo(0, 0);
         if (typeof to.title !== 'undefined') {
             document.title = to.title;
         }
