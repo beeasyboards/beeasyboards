@@ -6,7 +6,11 @@
     .blog-show article {
         img {
             height: auto;
-            max-width: 100%;
+            width: 100%;
+        }
+
+        > * {
+            @include bp-prop(margin-top, 12px, 24px);
         }
     }
 </style>
