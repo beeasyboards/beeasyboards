@@ -143,6 +143,10 @@
              * @return {Promise}
              */
             data(transition) {
+                if (typeof this.$route.query.search === 'undefined') {
+                    this.search = '';
+                }
+
                 return this.$resources({
                     posts: BlogResource.get(this.$route.query),
                 });
