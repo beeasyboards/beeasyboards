@@ -1,5 +1,6 @@
 <style lang="sass"> @import 'core';
     .blog-index-component header {
+        overflow: hidden;
         @include valign-parent();
     }
 
