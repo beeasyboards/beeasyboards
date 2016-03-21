@@ -1,7 +1,7 @@
 //
 // Section headers
 //
-section header {
+section header:not(.custom) {
     align-items: center;
     display: flex;
     font-weight: 300 !important;

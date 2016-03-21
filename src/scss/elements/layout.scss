@@ -20,18 +20,6 @@ main {
         &.padded {
             padding: 12px;
         }
-
-        //
-        // Headers
-        //
-        header {
-            margin-bottom: 12px;
-            padding: 12px 0;
-        }
-
-        &.padded header {
-            margin-top: -12px;
-        }
     }
 
     //
@@ -48,8 +36,11 @@ main {
     //
     > aside {
         @include bp(tablet) {
-            padding-left: 0 !important;
             width: 25%;
+        }
+
+        > h2 {
+            margin-bottom: 12px;
         }
     }
 }

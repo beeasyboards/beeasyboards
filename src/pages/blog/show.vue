@@ -1,24 +1,39 @@
 <style lang="sass"> @import 'core';
-    .blog-show header {
-
-    }
-
     .blog-show article {
+        padding: 12px 0;
+
         img {
             height: auto;
             width: 100%;
         }
 
-        > * {
-            @include bp-prop(margin-top, 12px, 24px);
+        > *:not(:last-child) {
+            @include bp-prop(margin-bottom, 12px, 24px);
         }
+
+        > blockquote {
+            margin-top: 0;
+            margin-left: 12px;
+            margin-right: 12px;
+            text-align: center;
+            @include bp-prop(margin-bottom, 12px, 24px);
+
+            > p {
+                font-size: 22px;
+            }
+        }
+    }
+
+    .blog-show aside {
+        @include bp-prop(background-color, $alternate-background-color, false, #fff);
+        @include bp-prop(border-top, 2px solid darken($alternate-background-color, 10%), none);
     }
 </style>
 
 <template>
     <main class="blog-show">
         <section class="padded with-sidebar">
-            <header>
+            <header class="custom">
                 <h1>{{ post.title }}</h1>
                 <time datetime="{{ post.published_at | moment }}">
                     {{ post.published_at | moment 'MMM DD, YYYY' }}
