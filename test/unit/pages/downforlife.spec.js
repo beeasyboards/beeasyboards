@@ -68,12 +68,12 @@ describe('Down for life', () => {
             homie = vm.$children[0];
 
         expect(homie.isTapped).toBe(false);
-        expect(homie.$el.querySelectorAll('.is-tapped').length).toBe(0);
+        expect(Object.values(homie.$el.classList).indexOf('is-tapped')).toBe(-1);
 
         homie.onTap();
         homie.$nextTick(() => {
             expect(homie.isTapped).toBe(true);
-            expect(homie.$el.querySelectorAll('.is-tapped').length).toBe(1);
+            expect(Object.values(homie.$el.classList).indexOf('is-tapped')).not.toBe(-1);
             done();
         });
     });
