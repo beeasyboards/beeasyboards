@@ -1,4 +1,5 @@
 import NavState from 'state/nav';
+import Browser from 'app/browser';
 
 //
 // Config
@@ -27,6 +28,7 @@ module.exports = {
      * @return {void}
      */
     before({ from, to, next, abort, redirect }) {
+        Browser.scrollTo(0);
         NavState.close();
         next();
     },
@@ -39,9 +41,8 @@ module.exports = {
      * @return {void}
      */
     after({ from, to }) {
-        window.scrollTo(0, 0);
         if (typeof to.title !== 'undefined') {
-            document.title = to.title;
+            Browser.setTitle(to.title);
         }
     },
 };
