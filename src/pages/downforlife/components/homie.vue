@@ -11,10 +11,14 @@
         position: relative;
         width: 100%;
 
-        .caption.is-tapped,
-        &:not(.is-mobile) .caption:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            opacity: 1;
+        &.is-tapped, &:not(.is-mobile):hover {
+            img {
+                filter: blur(2px);
+            }
+            .caption {
+                background-color: rgba(0, 0, 0, 0.8);
+                opacity: 1;
+            }
         }
     }
 
@@ -57,10 +61,13 @@
         @click.prevent="onClick"
         v-touch:tap="onTap"
         v-touch:doubletap="onDoubleTap"
-        v-bind:class="{ 'is-mobile': this.$isMobile }"
+        v-bind:class="{
+            'is-mobile': this.$isMobile,
+            'is-tapped': isTapped,
+        }"
     >
         <img v-if="hasImage" :src="homie.image.path">
-        <div class="caption" v-bind:class="{ 'is-tapped': isTapped }">
+        <div class="caption">
             <div class="name">{{ homie.name }}</div>
             <div class="down-since">Down since</div>
             <time datetime="{{ homie.created_at | moment }}">
