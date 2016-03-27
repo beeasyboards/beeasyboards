@@ -6,7 +6,7 @@
 
 <template>
     <main class="home-component">
-        <v-slider class="with-sidebar"></v-slider>
+        <v-slider class="with-sidebar" :slides="slides"></v-slider>
         <v-blog-sidebar class="padded" :posts="recentPosts"></v-blog-sidebar>
         <section class="padded">
             <v-featured-products class="featured-products"></v-featured-products>
@@ -16,6 +16,7 @@
 
 <script>
     import BlogResource from 'resources/blog';
+    import SliderResource from 'resources/slider';
     import SliderComponent from './components/slider';
     import RecentPostsComponent from './components/recent_posts';
     import BlogSidebarComponent from 'pages/blog/components/sidebar';
@@ -50,6 +51,7 @@
              */
             data(transition) {
                 return this.$resources({
+                    slides: SliderResource.get(),
                     recentPosts: BlogResource.getRecent(),
                 });
             },
