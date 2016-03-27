@@ -21,7 +21,7 @@
 </style>
 
 <template>
-    <a v-link="{ name: 'blog-show', params: { slug: post.slug }}" href="#">
+    <a v-link="{ name: 'blog-show', params: { slug: post.slug }}">
         <img v=if="src" :src="src" :alt="post.title">
         <h3>{{ post.title }}</h3>
         <div>{{ post.subtitle }}</div>
