@@ -6,6 +6,7 @@ module.exports = {
      * @type {Object}
      */
     redirects: {
+        '/contact-us': '/contact',
         '/downforlife': '/down-for-life',
     },
 
@@ -35,6 +36,14 @@ module.exports = {
         '/blog/:slug': {
             name: 'blog-show',
             component: require('pages/blog/show'),
+        },
+
+        //
+        // Contact
+        //
+        '/contact': {
+            name: 'contact',
+            component: require('pages/contact'),
         },
 
         //
