@@ -2,12 +2,18 @@
     .home-component .slider {
         border: 1px solid red;
     }
+
+    .home-component .v-blog-sidebar li:nth-of-type(4) {
+        @include bp(tablet) {
+            display: none;
+        }
+    }
 </style>
 
 <template>
     <main class="home-component">
         <v-slider class="with-sidebar" :slides="slides"></v-slider>
-        <v-blog-sidebar class="padded" :posts="recentPosts"></v-blog-sidebar>
+        <v-blog-sidebar class="v-blog-sidebar padded" :posts="recentPosts"></v-blog-sidebar>
         <section class="padded">
             <v-featured-products class="featured-products"></v-featured-products>
         </section>
@@ -18,9 +24,8 @@
     import BlogResource from 'resources/blog';
     import SliderResource from 'resources/slider';
     import SliderComponent from './components/slider';
-    import RecentPostsComponent from './components/recent_posts';
     import BlogSidebarComponent from 'pages/blog/components/sidebar';
-    import FeaturedProductsComponent from './components/featuredProducts';
+    import FeaturedProductsComponent from './components/featured_products';
 
     module.exports = {
 

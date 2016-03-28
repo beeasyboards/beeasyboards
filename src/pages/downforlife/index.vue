@@ -71,7 +71,7 @@
             data(transition) {
                 return this.$resources({
                     homies: DownForLifeResource.get(),
-                })
+                });
             },
         },
 
