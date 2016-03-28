@@ -23,11 +23,13 @@ Vue.directive('linkable', {
      * @return {void}
      */
     onClick(e) {
+        let isCtrlKey = e.ctrlKey || e.metaKey;
         for (let el of e.path) {
             if (el === this.el || el.tagName === 'A') {
-                if (el.hostname === window.location.hostname) {
+                let isLocalLink = el.hostname === window.location.hostname;
+                if (isLocalLink && !isCtrlKey) {
                     e.preventDefault();
-                    this.vm.$router.go({ path: el.pathname });
+                    return this.vm.$router.go({ path: el.pathname });
                 }
                 break;
             }

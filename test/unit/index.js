@@ -5,6 +5,7 @@ import Vue from 'vue';
 Vue.directive('link', {});
 Vue.directive('touch', {});
 Vue.directive('touch-options', {});
+Vue.directive('linkable', {});
 Vue.filter('moment', {});
 
 // Polyfill fn.bind() for PhantomJS

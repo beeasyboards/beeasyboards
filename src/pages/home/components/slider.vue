@@ -17,11 +17,14 @@
 
 <template>
     <section
+        v-linkable
         v-touch:swipeleft="advanceToNextSlide"
         v-touch:swiperight="returnToPreviousSlide"
         v-touch-options:swipe="{ direction: 'horizontal' }"
     >
-        <img v-if="currentSlide" :src="currentSlide.image.path">
+        <a :href="getHref(currentSlide)">
+            <img v-if="currentSlide" :src="currentSlide.image.path">
+        </a>
         <div class="buffer">
             <img v-if="previousSlide" :src="previousSlide.image.path">
             <img v-if="nextSlide" :src="nextSlide.image.path">
@@ -30,6 +33,11 @@
 </template>
 
 <script>
+    /**
+     * @type {Number}   Transition duration in milliseconds
+     */
+    let transitionDurationMs = 30000;
+
     module.exports = {
 
         /**
@@ -38,7 +46,26 @@
         data() {
             return {
                 currentIndex: 0,
+                transitionInterval: null,
             };
+        },
+
+        /**
+         * Start the transition interval
+         *
+         * @return {void}
+         */
+        attached() {
+            this.transitionInterval = setInterval(this.advanceToNextSlide, transitionDurationMs);
+        },
+
+        /**
+         * Clear the transition interval
+         *
+         * @return {void}
+         */
+        destroyed() {
+            clearInterval(this.transitionInterval);
         },
 
         /**
@@ -63,9 +90,11 @@
             },
 
             currentSlide() {
-                return typeof this.slides[this.currentIndex] !== 'undefined'
+                let currentSlide = typeof this.slides[this.currentIndex] !== 'undefined'
                     ? this.slides[this.currentIndex]
                     : null;
+
+                return currentSlide;
             },
 
             nextSlide() {
@@ -104,6 +133,16 @@
              */
             advanceToNextSlide() {
                 this.currentIndex = this.nextIndex;
+            },
+
+            /**
+             * Returns the href for a slide
+             *
+             * @param  {Object} slide
+             * @return {String}
+             */
+            getHref(slide) {
+                return slide.href || '/shop';
             },
 
             /**

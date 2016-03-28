@@ -81,5 +81,22 @@ describe('Home', () => {
             slider.returnToPreviousSlide();
             expect(slider.currentIndex).toBe(0);
         });
+
+        it('Should link to /shop when a slide has no href', (done) => {
+            let { vm, slider } = TestSlider([
+                { href: "/somewhere", image: { path: './../test.png' } },
+                { href: "", image: { path: './../test.png' } },
+            ]);
+
+            expect(vm.$el.querySelectorAll('a[href="/somewhere"]').length).toBe(1);
+            expect(vm.$el.querySelectorAll('a[href="/shop"]').length).toBe(0);
+            slider.advanceToNextSlide();
+
+            vm.$nextTick(() => {
+                expect(vm.$el.querySelectorAll('a[href="/somewhere"]').length).toBe(0);
+                expect(vm.$el.querySelectorAll('a[href="/shop"]').length).toBe(1);
+                done();
+            });
+        });
     });
 });
