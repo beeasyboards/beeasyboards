@@ -58,7 +58,7 @@ describe('Home', () => {
             expect (slider.nextIndex).toBe(0);
         });
 
-        it('Advances to the next slide when swiped left', () => {
+        it('Can advance to the next slide', () => {
             let { slider } = TestSlider([
                 { image: { path: './../test.png' } },
                 { image: { path: './../test.png' } },
@@ -66,11 +66,11 @@ describe('Home', () => {
             ]);
 
             slider.currentIndex = 1;
-            slider.onSwipeLeft();
+            slider.advanceToNextSlide();
             expect(slider.currentIndex).toBe(2);
         });
 
-        it('Returns to the previous slide when swiped right', () => {
+        it('Can return to the previous slide', () => {
             let { slider } = TestSlider([
                 { image: { path: './../test.png' } },
                 { image: { path: './../test.png' } },
@@ -78,7 +78,7 @@ describe('Home', () => {
             ]);
 
             slider.currentIndex = 1;
-            slider.onSwipeRight();
+            slider.returnToPreviousSlide();
             expect(slider.currentIndex).toBe(0);
         });
     });

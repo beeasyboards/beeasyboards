@@ -1,27 +1,30 @@
 <style lang="sass" scoped>@import 'core';
+    section {
+        @include bp-prop(padding, 0, 12px);
+        @include transition(padding);
+    }
+
     img {
         height: auto;
         width: 100%;
     }
+
+    // The buffer is just a place to load the previous and next images. It
+    // exists to force the browser into loading the image as soon as it
+    // is "on deck". This allows the slider to have a smooth change.
+    .buffer { display: none }
 </style>
 
 <template>
-    <section>
-        <!-- Previous slide -->
-        <div class="previous"></div>
-
-        <!-- Current slide -->
-        <div
-            class="current"
-            v-touch:swipeleft="onSwipeLeft"
-            v-touch:swiperight="onSwipeRight"
-            v-touch-options:swipe="{ direction: 'horizontal' }">
-            <img :src="currentSlide.image.path">
-        </div>
-
-        <!-- Next slide -->
-        <div v-if="nextcurrentIndex !== currentIndex" class="next">
-
+    <section
+        v-touch:swipeleft="advanceToNextSlide"
+        v-touch:swiperight="returnToPreviousSlide"
+        v-touch-options:swipe="{ direction: 'horizontal' }"
+    >
+        <img :src="currentSlide.image.path">
+        <div class="buffer">
+            <img v-if="previousIndex !== currentIndex" :src="previousSlide.image.path">
+            <img v-if="nextIndex !== currentIndex" :src="nextSlide.image.path">
         </div>
     </section>
 </template>
@@ -43,31 +46,30 @@
          */
         props: ['slides'],
 
+        /**
+         * @type {Object}
+         */
         computed: {
+
             /**
-             * Return the current slide
+             * Return the previous, current, or next slides
              *
-             * @return {Object|null}
+             * @return {Object}
              */
+            previousSlide() {
+                return this.slides[this.previousIndex];
+            },
+
             currentSlide() {
-                return typeof this.slides[this.currentIndex] !== 'undefined'
-                    ? this.slides[this.currentIndex]
-                    : null;
+                return this.slides[this.currentIndex];
+            },
+
+            nextSlide() {
+                return this.slides[this.nextIndex];
             },
 
             /**
-             * Determine what the next slide index is
-             *
-             * @return {Number}
-             */
-            nextIndex() {
-                return this.currentIndex < this.slides.length - 1
-                    ? this.currentIndex + 1
-                    : 0;
-            },
-
-            /**
-             * Determine what the previous slide index is
+             * Determine the previous or next slide index
              *
              * @return {Number}
              */
@@ -75,26 +77,35 @@
                 return this.currentIndex > 0
                     ? this.currentIndex - 1
                     : this.slides.length - 1;
-            }
+            },
+
+            nextIndex() {
+                return this.currentIndex < this.slides.length - 1
+                    ? this.currentIndex + 1
+                    : 0;
+            },
         },
 
+        /**
+         * @type {Object}
+         */
         methods: {
 
             /**
-             * Advance to the next slide
+             * Transition to the next slide
              *
              * @return {void}
              */
-            onSwipeLeft() {
+            advanceToNextSlide() {
                 this.currentIndex = this.nextIndex;
             },
 
             /**
-             * Return to the previous slide
+             * Transition to the previous slide
              *
              * @return {void}
              */
-            onSwipeRight() {
+            returnToPreviousSlide() {
                 this.currentIndex = this.previousIndex;
             },
         },
