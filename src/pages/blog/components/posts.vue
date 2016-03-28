@@ -1,21 +1,21 @@
-<style lang="sass" scoped> @import 'core';
-    ul {
+<style lang="sass"> @import 'core';
+    ul.v-blog-posts {
         display: flex;
         flex-wrap: wrap;
         list-style: none;
         padding: 0;
         @include bp-prop(margin, -6px, -12px);
         @include transition(margin);
-    }
 
-    li {
-        // IE 10 & 11 workaround for flex-basis and box-sizing
-        // github.com/philipwalton/flexbugs#7-flex-basis-doesnt-account-for-box-sizingborder-box
-        flex-basis: auto;
-        width: 100%;
+        li {
+            // IE 10 & 11 workaround for flex-basis and box-sizing
+            // github.com/philipwalton/flexbugs#7-flex-basis-doesnt-account-for-box-sizingborder-box
+            flex-basis: auto;
+            width: 100%;
 
-        @include bp-prop(padding, 6px, 12px);
-        @include transition('padding, width');
+            @include bp-prop(padding, 6px, 12px);
+            @include transition('padding, width');
+        }
     }
 </style>
 

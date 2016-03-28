@@ -25,7 +25,7 @@
     }
 
     .blog-show aside {
-        @include alternate-background-bp(large-phone);
+        @include alternate-background-bp(tablet);
     }
 </style>
 

@@ -1,8 +1,7 @@
 <style lang="sass">@import 'core';
     .blog-sidebar-component li {
-        width: 100%;
-        @include bp(large-phone) { width: 50% }
-        @include bp(tablet) { width: 100% }
+        @include bp(large-phone) { width: 50% !important }
+        @include bp(tablet) { width: 100% !important }
     }
 </style>
 
