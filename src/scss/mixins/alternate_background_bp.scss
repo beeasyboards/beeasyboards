@@ -1,0 +1,12 @@
+/**
+ * Alternate backgrounds for certain breakpoints
+ */
+@mixin alternate-background-bp($breakpoint) {
+    background-color: $alternate-background-color;
+    border-top: 1px solid darken($alternate-background-color, 10%);
+
+    @include bp($breakpoint) {
+        background-color: #fff;
+        border-top: none;
+    }
+}

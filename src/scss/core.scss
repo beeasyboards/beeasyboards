@@ -25,6 +25,7 @@ $sidebar-width-tablet: 25%;
 //
 // Mixins
 //
+@import './mixins/alternate_background_bp';
 @import './mixins/bp';
 @import './mixins/explode';
 @import './mixins/padding';

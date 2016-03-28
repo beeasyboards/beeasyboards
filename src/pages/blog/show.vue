@@ -25,8 +25,7 @@
     }
 
     .blog-show aside {
-        @include bp-prop(background-color, $alternate-background-color, false, #fff);
-        @include bp-prop(border-top, 2px solid darken($alternate-background-color, 10%), none);
+        @include alternate-background-bp(large-phone);
     }
 </style>
 
