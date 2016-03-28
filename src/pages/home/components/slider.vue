@@ -21,10 +21,10 @@
         v-touch:swiperight="returnToPreviousSlide"
         v-touch-options:swipe="{ direction: 'horizontal' }"
     >
-        <img :src="currentSlide.image.path">
+        <img v-if="currentSlide" :src="currentSlide.image.path">
         <div class="buffer">
-            <img v-if="previousIndex !== currentIndex" :src="previousSlide.image.path">
-            <img v-if="nextIndex !== currentIndex" :src="nextSlide.image.path">
+            <img v-if="previousSlide" :src="previousSlide.image.path">
+            <img v-if="nextSlide" :src="nextSlide.image.path">
         </div>
     </section>
 </template>
@@ -57,15 +57,21 @@
              * @return {Object}
              */
             previousSlide() {
-                return this.slides[this.previousIndex];
+                return typeof this.slides[this.previousIndex] !== 'undefined'
+                    ? this.slides[this.previousIndex]
+                    : null;
             },
 
             currentSlide() {
-                return this.slides[this.currentIndex];
+                return typeof this.slides[this.currentIndex] !== 'undefined'
+                    ? this.slides[this.currentIndex]
+                    : null;
             },
 
             nextSlide() {
-                return this.slides[this.nextIndex];
+                return typeof this.slides[this.nextIndex] !== 'undefined'
+                    ? this.slides[this.nextIndex]
+                    : null;
             },
 
             /**
