@@ -6,6 +6,9 @@ a {
     text-decoration: none;
     @include transition(color);
     &:hover { color: #000 }
+    > * {
+        @include transition(color);
+    }
 }
 
 .fa-btn {
@@ -14,18 +17,62 @@ a {
 }
 
 //
-// Text boxes
+// Form containers
 //
-input, textarea {
+form {
+    display: flex;
+    flex-wrap: wrap;
+
+    // Form rows
+    > div.row {
+        display: flex;
+        flex-basis: auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+
+        > .half {
+            flex-basis: auto;
+            width: 100%;
+            @include transition(width);
+            @include bp(large-phone) { width: calc(50% - 6px) }
+            @include bp(tablet) { width: calc(50% - 12px) }
+        }
+    }
+
+    // Form fields
+    .field {
+        margin-bottom: 12px;
+        @include transition(margin-bottom);
+        @include bp(large-phone) { margin-bottom: 12px }
+        @include bp(tablet) { margin-bottom: 24px }
+    }
+}
+//
+// All inputs
+//
+button,
+input,
+select,
+textarea {
     appearance: none !important;
     border: 1px solid #aaa;
     border-radius: 2px;
-    text-transform: lowercase;
     padding: 12px;
     width: 100%;
     @include transition(border-color);
 
     &:focus { border-color: #222 }
+}
+
+//
+// Text boxes
+//
+input, textarea {
+    text-transform: lowercase;
+    width: 100%;
+    @include transition(border-color);
+
     &::-ms-clear { display: none }
 
     @mixin placeholder() { color: #999 }
@@ -37,4 +84,25 @@ input, textarea {
 
 input {
     @include props((height, line-height), 48px);
+}
+
+textarea {
+    resize: vertical;
+}
+
+//
+// Buttons
+//
+a.btn,
+button,
+input[type=button],
+input[type=submit] {
+    color: #fafafa;
+    background-color: #222;
+
+    &:hover {
+        background-color: #111;
+    }
+
+    @include transition('background-color, color');
 }
