@@ -1,27 +1,17 @@
 <style lang="sass">
-    @import './scss/core';
-
-    //
-    // Global styles
-    //
-    @import 'normalize.scss/normalize.scss';
-    @import 'transitions';
-
-    //
-    // Elements
-    //
-    @import 'elements/containers';
-    @import 'elements/layout';
-    @import 'elements/media';
-    @import 'elements/sections';
-    @import 'elements/typography';
-    @import 'elements/ui';
+    @import 'core';
+    @import 'global';
 </style>
 
 <template>
-    <div>
-        <v-header></v-header>
-        <router-view transition="fade" transition-mode="out-in"></router-view>
+    <div class="root">
+        <v-header class="header"></v-header>
+        <router-view class="content" transition="fade" transition-mode="out-in"></router-view>
+        <footer class="footer">
+            <div class="margins">
+                Footer content
+            </div>
+        </footer>
     </div>
 </template>
 

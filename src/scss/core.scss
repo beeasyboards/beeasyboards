@@ -15,18 +15,21 @@ $vimeo-color: #aad450;
 $instagram-color: #517fa4;
 
 $font-color: #333;
-$alternate-background-color: #fcfcfc;
+$alternate-background-color: #f4f4f4;
 
 $header-height-mobile: 84px;
 $header-height-tablet: 96px;
 $header-height-desktop: 108px;
 
-$layout-padding-mobile: 12px;
-$layout-padding-tablet: 12px;
-$layout-width: 1200px;
+$site-max-width: 1200px;
+$sidebar-width: 30%;
 
-$sidebar-width-mobile: 100%;
-$sidebar-width-tablet: 25%;
+$layout-padding-mobile: 12px; // deprecated
+$layout-padding-tablet: 12px; // deprecated
+$layout-width: 1200px; // deprecated
+$sidebar-width-mobile: 100%; // deprecated
+$sidebar-width-tablet: 25%; // deprecated
+
 
 //
 // Mixins
@@ -38,4 +41,3 @@ $sidebar-width-tablet: 25%;
 @import './mixins/props';
 @import './mixins/transition';
 @import './mixins/valign';
-

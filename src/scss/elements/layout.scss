@@ -1,46 +1,53 @@
 //
-// Layout containers
+// Html
 //
-main {
+html {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    text-transform: lowercase;
+
+    .caseable { text-transform: none !important }
+    *, *:before, *:after { box-sizing: inherit !important; }
+    body { height: 100% }
+}
+
+//
+// Root layout
+//
+#app.root {
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    max-width: $layout-width;
+    flex-direction: column;
+    height: 100vh; // Avoid the IE 10-11 min-height bug
 
-    //
-    // All layout containers
-    //
-    > section, > aside {
-        flex-basis: auto;
+    > .header {
+        position: fixed;
+        z-index: 9999;
         width: 100%;
-
-        //
-        // Padded content
-        //
-        &.padded {
-            padding: 12px;
-        }
+        @include bp-prop(height, $header-height-mobile, $header-height-tablet, $header-height-desktop);
+        @include transition(height);
     }
 
-    //
-    // Content sections
-    //
-    > section {
-        @include bp(tablet) {
-            &.with-sidebar { width: 75% }
-        }
+    > .content {
+        flex: 1 0 auto;
+        @include bp-prop(margin-top, $header-height-mobile, $header-height-tablet, $header-height-desktop);
+        @include transition(margin-top);
     }
 
-    //
-    // Sidebars
-    //
-    > aside {
-        @include bp(tablet) {
-            width: 25%;
-        }
-
-        > h2 {
-            margin-bottom: 12px;
-        }
+    > .footer {
+        flex-shrink: 0;
     }
+}
+
+//
+// Global margins and padding
+//
+.margins {
+    margin: 0 auto;
+    max-width: $site-max-width;
+    width: 100%;
+}
+
+.padding {
+    padding: 12px;
 }

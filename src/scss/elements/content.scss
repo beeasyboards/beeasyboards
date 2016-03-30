@@ -1,0 +1,51 @@
+//
+// Main content
+//
+main:not(.reset) {
+    display: flex;
+    flex-direction: column;
+
+    &.grow-last > :last-child { flex: 1 }
+
+    //
+    // Sections
+    //
+    > section {
+        display: flex;
+        flex-wrap: wrap;
+        &.alternate { background-color: $alternate-background-color }
+        @include bp(tablet) { &.tablet-alternate { background-color: $alternate-background-color } }
+        @include bp(desktop) { &.desktop-alternate { background-color: $alternate-background-color } }
+
+        &.grow { flex: 1 }
+        @include bp(tablet) { &.tablet-grow { flex: 1 } }
+        @include bp(desktop) { &.desktop-grow { flex: 1 } }
+    }
+
+    //
+    // Headers
+    //
+    > section > header,
+    > section > div > header,
+    > section > aside > header {
+        font-size: 32px;
+        padding-bottom: 6px;
+    }
+
+    //
+    // Section <div> tag with only one sibling
+    //
+    > section > div:only-of-type:nth-child(2):last-child,
+    > section > div:only-of-type:nth-last-child(2):first-child {
+        flex: 1;
+    }
+
+    //
+    // Section <aside> tag with only one sibling
+    //
+    > section > aside:only-of-type:nth-child(2):last-child,
+    > section > aside:only-of-type:nth-last-child(2):first-child {
+        @include bp-prop(width, 100%, $sidebar-width);
+        @include transition(width);
+    }
+}

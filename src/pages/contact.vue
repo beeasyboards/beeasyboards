@@ -45,7 +45,8 @@
         }
 
         i.fa {
-            min-width: 32px;
+            margin-right: 6px;
+            min-width: 24px;
             font-size: 24px;
             text-align: center;
         }

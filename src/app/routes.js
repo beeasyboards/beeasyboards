@@ -55,6 +55,14 @@ module.exports = {
         },
 
         //
+        // Sandbox
+        //
+        '/sandbox': {
+            name: 'sandbox',
+            component: require('pages/sandbox'),
+        },
+
+        //
         // Shop
         //
         '/shop': {
