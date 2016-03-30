@@ -49,6 +49,7 @@ html {
     width: 100%;
 }
 
-.padding {
-    padding: 12px;
-}
+.padding { padding: 12px }
+.large-phone-padding { @include bp(large-phone) { padding: 12px } }
+.tablet-padding { @include bp(tablet) { padding: 12px } }
+.desktop-padding { @include bp(desktop) { padding: 12px } }

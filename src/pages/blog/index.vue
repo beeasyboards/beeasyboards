@@ -79,34 +79,32 @@
 </style>
 
 <template>
-    <main class="blog-index-component">
-        <section class="padded">
-            <header>
-                <h1>{{ header }}</h1>
-                <input
-                    :class="{ 'is-searching': isSearching }"
-                    debounce="300"
-                    placeholder="Search"
-                    type="search"
-                    v-el:search
-                    v-model="search"
-                    @blur="onSearchBlur"
-                    @keypress.enter="onSearchEnter"
-                />
-                <i
-                    v-if="!isSearching || search.length === 0"
-                    :class="{ 'is-searching': isSearching }"
-                    @click="onSearchClicked" class="fa fa-search">
-                </i>
-                <i
-                    v-else
-                    v-touch:tap="onClearClicked"
-                    class="fa fa-times">
-                </i>
-            </header>
-            <v-blog-posts v-if="posts.length" :posts="posts"></v-blog-posts>
-            <p v-else>Sorry homie, we didn't find anything.</p>
-        </section>
+    <main class="blog-index-component reset margins">
+        <header>
+            <h1>{{ header }}</h1>
+            <input
+                :class="{ 'is-searching': isSearching }"
+                debounce="300"
+                placeholder="Search"
+                type="search"
+                v-el:search
+                v-model="search"
+                @blur="onSearchBlur"
+                @keypress.enter="onSearchEnter"
+            />
+            <i
+                v-if="!isSearching || search.length === 0"
+                :class="{ 'is-searching': isSearching }"
+                @click="onSearchClicked" class="fa fa-search">
+            </i>
+            <i
+                v-else
+                v-touch:tap="onClearClicked"
+                class="fa fa-times">
+            </i>
+        </header>
+        <v-blog-posts v-if="posts.length" :posts="posts"></v-blog-posts>
+        <p v-else>Sorry homie, we didn't find anything.</p>
     </main>
 </template>
 

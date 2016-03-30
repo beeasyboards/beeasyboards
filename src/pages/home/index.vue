@@ -10,7 +10,11 @@
             @include transition(width);
         }
 
-        > .v-slider { order: 1 }
+        > .v-slider {
+            order: 1;
+            @include transition(padding);
+        }
+
         > .v-featured-products { order: 2 }
         > .v-blog-sidebar { order: 3 }
 
@@ -43,7 +47,7 @@
 
 <template>
     <main class="home-page-component reset margins">
-        <v-slider class="v-slider padding" :slides="slides"></v-slider>
+        <v-slider class="v-slider tablet-padding" :slides="slides"></v-slider>
         <v-blog-sidebar class="v-blog-sidebar padding" :posts="recentPosts"></v-blog-sidebar>
         <v-featured-products class="v-featured-products padding"></v-featured-products>
     </main>
