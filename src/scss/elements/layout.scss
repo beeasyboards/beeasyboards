@@ -30,6 +30,7 @@ html {
 
     > .router {
         flex: 1 0 auto;
+        position: relative;
         @include bp-prop(margin-top, $header-height-mobile, $header-height-tablet, $header-height-desktop);
         @include transition(margin-top);
     }
