@@ -3,17 +3,19 @@
         background-color: #000;
         color: #fff;
 
-        .inner {
-            align-items: center;
+        > div {
             display: flex;
             justify-content: space-between;
+            padding: 0 12px;
             @include bp-prop(height, $header-height-mobile, $header-height-tablet, $header-height-desktop);
             @include transition(height);
         }
 
         a.logo {
+            align-items: center;
+            display: flex;
+
             img {
-                margin-bottom: -5%; // align the logo by font baseline, not by height
                 width: auto;
                 @include bp-prop('height', 35px, 45px, 60px);
                 @include transition('height');
@@ -24,7 +26,7 @@
 
 <template>
     <header>
-        <div class="inner content">
+        <div class="margins">
             <a v-link="{ name: 'home' }" class="logo">
                 <img src="./../assets/logo_white.png" alt="Be Easy">
             </a>
@@ -34,13 +36,15 @@
 </template>
 
 <script>
+    import NavComponent from './nav';
+
     module.exports = {
 
         /**
          * @type {Object}
          */
         components: {
-            'v-nav': require('./nav'),
+            'v-nav': NavComponent,
         },
     };
 </script>

@@ -1,22 +1,51 @@
 <style lang="sass">@import 'core';
-    .home-component .slider {
-        border: 1px solid red;
-    }
+    .home-page-component {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
 
-    .home-component .v-blog-sidebar li:nth-of-type(4) {
+        > section, aside {
+            flex-basis: auto;
+            width: 100%;
+            @include transition(width);
+        }
+
+        > .v-slider { order: 1 }
+        > .v-featured-products { order: 2 }
+        > .v-blog-sidebar { order: 3 }
+
         @include bp(tablet) {
-            display: none;
+            > .v-slider {
+                order: 1;
+                width: calc(100% - #{ $sidebar-width });
+            }
+
+            > .v-blog-sidebar {
+                order: 2;
+                width: $sidebar-width;
+                li {
+                    overflow: hidden;
+                    &:nth-of-type(3), &:nth-of-type(4) { display: none; }
+                    @include transition(height);
+                }
+            }
+
+            > .v-featured-products {
+                order: 3;
+            }
+        }
+
+        @include bp(desktop) {
+            > .v-blog-sidebar li:nth-of-type(3) { display: block }
         }
     }
 </style>
 
 <template>
-    <main class="home-component">
-        <v-slider class="with-sidebar" :slides="slides"></v-slider>
-        <v-blog-sidebar class="v-blog-sidebar padded" :posts="recentPosts"></v-blog-sidebar>
-        <section class="padded">
-            <v-featured-products class="featured-products"></v-featured-products>
-        </section>
+    <main class="home-page-component reset margins">
+        <v-slider class="v-slider padding" :slides="slides"></v-slider>
+        <v-blog-sidebar class="v-blog-sidebar padding" :posts="recentPosts"></v-blog-sidebar>
+        <v-featured-products class="v-featured-products padding"></v-featured-products>
     </main>
 </template>
 

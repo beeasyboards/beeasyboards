@@ -1,7 +1,7 @@
 <style lang="sass" scoped> @import 'core';
     nav {
-        display: flex;
         align-items: center;
+        display: flex;
 
         a {
             color: #fff;

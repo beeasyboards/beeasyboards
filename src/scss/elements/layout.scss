@@ -28,7 +28,7 @@ html {
         @include transition(height);
     }
 
-    > .content {
+    > .router {
         flex: 1 0 auto;
         @include bp-prop(margin-top, $header-height-mobile, $header-height-tablet, $header-height-desktop);
         @include transition(margin-top);

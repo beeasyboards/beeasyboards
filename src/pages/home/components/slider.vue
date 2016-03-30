@@ -1,9 +1,4 @@
 <style lang="sass" scoped>@import 'core';
-    section {
-        @include bp-prop(padding, 0, 12px);
-        @include transition(padding);
-    }
-
     img {
         height: auto;
         width: 100%;
@@ -22,7 +17,7 @@
         v-touch:swiperight="returnToPreviousSlide"
         v-touch-options:swipe="{ direction: 'horizontal' }"
     >
-        <a :href="getHref(currentSlide)">
+        <a :href="currentSlide.href">
             <img v-if="currentSlide" :src="currentSlide.image.path">
         </a>
         <div class="buffer">
@@ -33,6 +28,11 @@
 </template>
 
 <script>
+    /**
+     * @type {String}   Default href for slide links
+     */
+    let defaultSlideHref = '/shop';
+
     /**
      * @type {Number}   Transition duration in milliseconds
      */
@@ -90,11 +90,17 @@
             },
 
             currentSlide() {
-                let currentSlide = typeof this.slides[this.currentIndex] !== 'undefined'
-                    ? this.slides[this.currentIndex]
-                    : null;
+                let slide = { href: '', image: { path: '' } };
 
-                return currentSlide;
+                if (typeof this.slides[this.currentIndex] !== 'undefined') {
+                    slide = this.slides[this.currentIndex];
+                }
+
+                if (slide.href.length === 0) {
+                    slide.href = defaultSlideHref;
+                }
+
+                return slide;
             },
 
             nextSlide() {
@@ -133,16 +139,6 @@
              */
             advanceToNextSlide() {
                 this.currentIndex = this.nextIndex;
-            },
-
-            /**
-             * Returns the href for a slide
-             *
-             * @param  {Object} slide
-             * @return {String}
-             */
-            getHref(slide) {
-                return slide.href || '/shop';
             },
 
             /**

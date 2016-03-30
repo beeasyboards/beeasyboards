@@ -7,6 +7,8 @@ import VueResource from 'vue-resource';
 import { redirects, routes } from './app/routes';
 import { config, before, after } from './app/router';
 
+Vue.config.debug = true
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 require('./app/boot');
